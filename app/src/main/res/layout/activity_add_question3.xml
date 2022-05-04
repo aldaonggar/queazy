@@ -5,22 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/purple_500"
-    tools:context=".AddQuizActivity">
+    tools:context=".AddQuestion3Activity">
 
     <Button
-        android:id="@+id/btnAddQuestion"
+        android:id="@+id/btnAddQuestion3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#FFC107"
-        android:onClick="onBtnAddQuestion_Clicked"
+        android:onClick="onBtnAddQuestion3_Clicked"
         android:text="Add another question!"
-        app:layout_constraintBottom_toTopOf="@+id/btnAddQuiz"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddQuiz3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtD" />
+        app:layout_constraintTop_toBottomOf="@+id/txtD3"
+        app:layout_constraintVertical_bias="0.815" />
 
     <EditText
-        android:id="@+id/txtC"
+        android:id="@+id/txtC3"
         android:layout_width="317dp"
         android:layout_height="54dp"
         android:height="48dp"
@@ -33,11 +35,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAddYourQuiz"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddYourQuiz3"
         app:layout_constraintVertical_bias="0.512" />
 
     <EditText
-        android:id="@+id/txtD"
+        android:id="@+id/txtD3"
         android:layout_width="317dp"
         android:layout_height="54dp"
         android:height="48dp"
@@ -50,11 +52,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAddYourQuiz"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddYourQuiz3"
         app:layout_constraintVertical_bias="0.633" />
 
     <EditText
-        android:id="@+id/txtB"
+        android:id="@+id/txtB3"
         android:layout_width="317dp"
         android:layout_height="54dp"
         android:height="48dp"
@@ -67,11 +69,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAddYourQuiz"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddYourQuiz3"
         app:layout_constraintVertical_bias="0.388" />
 
     <EditText
-        android:id="@+id/txtA"
+        android:id="@+id/txtA3"
         android:layout_width="317dp"
         android:layout_height="54dp"
         android:height="48dp"
@@ -83,11 +85,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAddYourQuiz"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddYourQuiz3"
         app:layout_constraintVertical_bias="0.267" />
 
     <TextView
-        android:id="@+id/txtAddYourQuiz"
+        android:id="@+id/txtAddYourQuiz3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/purple_500"
@@ -104,31 +106,103 @@
         tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/txtQuestion"
+        android:id="@+id/txtQuestion3"
         android:layout_width="315dp"
         android:layout_height="71dp"
         android:height="48dp"
         android:background="#FFFFFF"
         android:ems="10"
-        android:hint="Question"
+        android:hint="Question 3"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAddYourQuiz"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddYourQuiz3"
         app:layout_constraintVertical_bias="0.059" />
 
     <Button
-        android:id="@+id/btnAddQuiz"
+        android:id="@+id/btnAddQuiz3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#FFC107"
-        android:onClick="onBtnAddQuiz_Clicked"
+        android:onClick="onBtnAddQuiz3_Clicked"
         android:text="Add quiz!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtD"
-        app:layout_constraintVertical_bias="0.664" />
+        app:layout_constraintTop_toBottomOf="@+id/txtD3"
+        app:layout_constraintVertical_bias="0.904" />
+
+    <Button
+        android:id="@+id/btnBackToAddQuestion2Page"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#FFC107"
+        android:onClick="onBtnBackToAddQuestion2Page_Clicked"
+        android:rotationY="180"
+        android:text="➜"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
+
+    <TextView
+        android:id="@+id/txtRightAns3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Right answer:"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.788" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFC107"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddQuestion3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtRightAns3"
+        app:layout_constraintTop_toBottomOf="@+id/txtD3">
+
+        <RadioButton
+            android:id="@+id/rbA3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="#FFFFFF"
+            android:text="A"
+            android:textColor="#FFFFFF" />
+
+        <RadioButton
+            android:id="@+id/rbB3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="#FFFFFF"
+            android:text="B"
+            android:textColor="#FFFFFF" />
+
+        <RadioButton
+            android:id="@+id/rbC3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="#FFFFFF"
+            android:text="C"
+            android:textColor="#FFFFFF" />
+
+        <RadioButton
+            android:id="@+id/rbD3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="#FFFFFF"
+            android:text="D"
+            android:textColor="#FFFFFF" />
+    </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>

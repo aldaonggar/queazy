@@ -1,7 +1,6 @@
 package be.kuleuven.queazy;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.ButtonBarLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +21,7 @@ public class AddQuizNameActivity extends AppCompatActivity {
     }
 
     public void onBtnAddQuestions_Clicked(View caller){
-        Intent intent = new Intent(this, AddQuizActivity.class);
+        Intent intent = new Intent(this, AddQuestion1Activity.class);
         startActivity(intent);
     }
 

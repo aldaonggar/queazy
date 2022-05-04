@@ -10,10 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Queazy">
         <activity
+            android:name=".AddQuestion5Activity"
+            android:exported="false" />
+        <activity
+            android:name=".AddQuestion4Activity"
+            android:exported="false" />
+        <activity
+            android:name=".AddQuestion3Activity"
+            android:exported="false" />
+        <activity
+            android:name=".AddQuestion2Activity"
+            android:exported="false" />
+        <activity
             android:name=".AddQuizNameActivity"
             android:exported="false" />
         <activity
-            android:name=".AddQuizActivity"
+            android:name=".AddQuestion1Activity"
             android:exported="false" />
         <activity
             android:name=".MenuActivity"

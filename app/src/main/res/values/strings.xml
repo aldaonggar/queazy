@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">queazy</string>
+    <string-array name="difficulty_modes">
+        <item>BEGINNER</item>
+        <item>MEDIUM</item>
+        <item>EXPERIENCED</item>
+        <item>PRO</item>
+        <item>SCHOLAR</item>
+    </string-array>
 </resources>
