@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple_500"
+    tools:context=".AddQuizActivity">
+
+    <Button
+        android:id="@+id/btnAddQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFC107"
+        android:onClick="onBtnAddQuestion_Clicked"
+        android:text="Add another question!"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddQuiz"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtD" />
+
+    <EditText
+        android:id="@+id/txtC"
+        android:layout_width="317dp"
+        android:layout_height="54dp"
+        android:height="48dp"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:hint="C"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddYourQuiz"
+        app:layout_constraintVertical_bias="0.512" />
+
+    <EditText
+        android:id="@+id/txtD"
+        android:layout_width="317dp"
+        android:layout_height="54dp"
+        android:height="48dp"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:hint="D"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddYourQuiz"
+        app:layout_constraintVertical_bias="0.633" />
+
+    <EditText
+        android:id="@+id/txtB"
+        android:layout_width="317dp"
+        android:layout_height="54dp"
+        android:height="48dp"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:hint="B"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddYourQuiz"
+        app:layout_constraintVertical_bias="0.388" />
+
+    <EditText
+        android:id="@+id/txtA"
+        android:layout_width="317dp"
+        android:layout_height="54dp"
+        android:height="48dp"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:hint="A"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddYourQuiz"
+        app:layout_constraintVertical_bias="0.267" />
+
+    <TextView
+        android:id="@+id/txtAddYourQuiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        android:fadingEdge="vertical"
+        android:fontFamily="sans-serif-black"
+        android:text="Add your quiz!"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.044"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/txtQuestion"
+        android:layout_width="315dp"
+        android:layout_height="71dp"
+        android:height="48dp"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:hint="Question"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddYourQuiz"
+        app:layout_constraintVertical_bias="0.059" />
+
+    <Button
+        android:id="@+id/btnAddQuiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFC107"
+        android:onClick="onBtnAddQuiz_Clicked"
+        android:text="Add quiz!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtD"
+        app:layout_constraintVertical_bias="0.664" />
+</androidx.constraintlayout.widget.ConstraintLayout>
