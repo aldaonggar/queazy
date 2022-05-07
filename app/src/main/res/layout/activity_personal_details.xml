@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/purple_500"
-    tools:context=".PersonalDetailsActivity">
+    tools:context=".PersonalDetailsActivity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="35dp">
 
     <TextView
         android:id="@+id/txtChangeName"
@@ -20,7 +22,7 @@
         app:layout_constraintHorizontal_bias="0.068"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.072" />
+        app:layout_constraintVertical_bias="0.122" />
 
     <EditText
         android:id="@+id/txtName2"
@@ -52,7 +54,7 @@
         app:layout_constraintHorizontal_bias="0.082"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.232" />
+        app:layout_constraintVertical_bias="0.281" />
 
     <EditText
         android:id="@+id/txtUsername2"
@@ -68,7 +70,7 @@
         app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtChangeUsername"
-        app:layout_constraintVertical_bias="0.03"
+        app:layout_constraintVertical_bias="0.034"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TextView
@@ -84,7 +86,7 @@
         app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.399" />
+        app:layout_constraintVertical_bias="0.448" />
 
     <EditText
         android:id="@+id/txtPassword2"
@@ -100,7 +102,7 @@
         app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtChangePassword"
-        app:layout_constraintVertical_bias="0.03"
+        app:layout_constraintVertical_bias="0.036"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
@@ -117,6 +119,29 @@
         app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPassword2"
-        app:layout_constraintVertical_bias="0.03"
+        app:layout_constraintVertical_bias="0.032"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/btnConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFC107"
+        android:text="confirm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.723" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFC107"
+        android:rotationY="180"
+        android:text="➜"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="21dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
