@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Queazy">
         <activity
+            android:name=".PersonalDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddQuestion5Activity"
             android:exported="false" />
         <activity
