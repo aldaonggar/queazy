@@ -12,6 +12,8 @@ public class MenuActivity extends AppCompatActivity {
     private Button btnLogOut;
     private Button btnAddQuizSuggestion;
     private ImageButton ibProfile;
+    private Button btnQuizzes;
+    private Button btnRankings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +22,22 @@ public class MenuActivity extends AppCompatActivity {
         btnLogOut = (Button) findViewById(R.id.btnLogOut);
         btnAddQuizSuggestion = (Button) findViewById(R.id.btnAddQuizSuggestion);
         ibProfile = (ImageButton) findViewById(R.id.ibProfile);
+        btnQuizzes = (Button) findViewById(R.id.btnQuizzes);
+        btnRankings = (Button) findViewById(R.id.btnRankings);
     }
 
     public void onBtnLogOut_Clicked(View caller){
         Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    public void onBtnQuizzes_Clicked(View caller){
+        Intent intent = new Intent(this, QuizListActivity.class);
+        startActivity(intent);
+    }
+
+    public void onBtnRankings_Clicked(View caller){
+        Intent intent = new Intent(this, RankingsActivity.class);
         startActivity(intent);
     }
 

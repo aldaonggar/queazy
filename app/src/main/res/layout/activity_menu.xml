@@ -26,12 +26,13 @@
         android:layout_width="150dp"
         android:layout_height="48dp"
         android:backgroundTint="#FFC107"
+        android:onClick="onBtnQuizzes_Clicked"
         android:text="Quizzes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.278" />
+        app:layout_constraintVertical_bias="0.3" />
 
     <Button
         android:id="@+id/btnMap"
@@ -44,19 +45,20 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.389" />
+        app:layout_constraintVertical_bias="0.4" />
 
     <Button
         android:id="@+id/btnRankings"
         android:layout_width="150dp"
         android:layout_height="48dp"
         android:backgroundTint="#FFC107"
+        android:onClick="onBtnRankings_Clicked"
         android:text="Rankings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <Button
         android:id="@+id/btnLogOut"
@@ -82,5 +84,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.024"
+        tools:ignore="SpeakableTextPresentCheck"
         tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>

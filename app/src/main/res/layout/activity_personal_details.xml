@@ -31,6 +31,7 @@
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
+        android:hint="new name"
         android:inputType="textPersonName"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,6 +64,7 @@
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
+        android:hint="new username"
         android:inputType="textPersonName"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -123,11 +125,11 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
-        android:id="@+id/btnConfirm"
+        android:id="@+id/btnConfirmChange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#FFC107"
-        android:text="confirm"
+        android:text="confirm changes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -136,12 +138,17 @@
         app:layout_constraintVertical_bias="0.723" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/btnBackToProfilePage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:backgroundTint="#FFC107"
+        android:onClick="onBtnBackToProfilePage_Clicked"
         android:rotationY="180"
         android:text="➜"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="21dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 </androidx.constraintlayout.widget.ConstraintLayout>

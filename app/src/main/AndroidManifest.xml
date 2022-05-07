@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Queazy">
         <activity
+            android:name=".QuizActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RankingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".PersonalDetailsActivity"
             android:exported="false" />
         <activity

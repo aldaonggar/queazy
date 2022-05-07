@@ -107,7 +107,7 @@
         tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/txtQuestion2"
+        android:id="@+id/txtWriteQuestion2"
         android:layout_width="315dp"
         android:layout_height="71dp"
         android:height="48dp"
