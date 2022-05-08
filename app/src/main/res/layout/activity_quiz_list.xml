@@ -5,4 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#6200EE"
-    tools:context=".QuizListActivity"/>
+    tools:context=".QuizListActivity">
+
+    <TextView
+        android:id="@+id/txtQuizList"
+        android:layout_width="226dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="155dp"
+        android:text="SELECT QUIZ"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnQuiz1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="126dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
