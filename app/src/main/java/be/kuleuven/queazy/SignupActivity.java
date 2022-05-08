@@ -28,7 +28,6 @@ public class SignupActivity extends AppCompatActivity {
     private Button btnSignUp;
     private Button btnBackToLoginPage;
     private RequestQueue requestQueue;
-    private RequestQueue requestQueue2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +48,10 @@ public class SignupActivity extends AppCompatActivity {
             signup2();
             Intent intent = new Intent(this, MenuActivity.class);
             startActivity(intent);
-        } else if (!passwordMatching()) {
-            Toast.makeText(SignupActivity.this, "Passwords must match", Toast.LENGTH_SHORT).show();
         } else if (!uniqueUsername()) {
             Toast.makeText(SignupActivity.this, "This username already exists", Toast.LENGTH_SHORT).show();
+        } else if (!passwordMatching()) {
+            Toast.makeText(SignupActivity.this, "Passwords must match", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -87,14 +86,15 @@ public class SignupActivity extends AppCompatActivity {
 
         String requestURL = "https://studev.groept.be/api/a21pt216/usernameCheck";
 
-        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
-                new Response.Listener<JSONArray>() {
+        StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(String response) {
                         try {
                             String responseStringUsername = "";
+                            JSONArray responseArray = new JSONArray(response);
                             for(int i = 0; i < response.length(); i++){
-                                JSONObject currentObject = response.getJSONObject( i );
+                                JSONObject currentObject = responseArray.getJSONObject( i );
                                 responseStringUsername = currentObject.getString("username");
                                 usernames.add(responseStringUsername); //if possible, rewrite using lambda expressions
                             }
@@ -163,7 +163,7 @@ public class SignupActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {}
                 }
         );
-        requestQueue2.add(submitRequest);
+        requestQueue.add(submitRequest);
     }
 }
 
