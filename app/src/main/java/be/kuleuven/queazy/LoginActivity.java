@@ -41,17 +41,6 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
- /*   public void onBtnLogIn_Clicked(View caller){
-        if (!usernameExists()) {
-            Toast.makeText(LoginActivity.this, "Incorrect username", Toast.LENGTH_SHORT).show();
-        } else if(!passwordMatch()) {
-            Toast.makeText(LoginActivity.this, "Incorrect password", Toast.LENGTH_SHORT).show();
-        } else if (usernameExists() && passwordMatch()) {
-            Intent intent = new Intent(this, MenuActivity.class);
-            startActivity(intent);
-        }
-    }*/
-
     public void onBtnLogIn_Clicked(View caller) {
         EditText textUsername = (EditText) findViewById(R.id.txtUsername);
         EditText textPassword = (EditText) findViewById(R.id.Password);
@@ -100,53 +89,6 @@ public class LoginActivity extends AppCompatActivity {
         );
 
         requestQueue.add(submitRequest);
-        System.out.println("reached here");
-
 
     }
-
-    /*public boolean passwordMatch() {
-        EditText pwrd = (EditText) findViewById(R.id.Password);
-        EditText username = (EditText) findViewById(R.id.txtUsername);
-        String password = String.valueOf(pwrd.getText());
-        ArrayList<String> passwords = new ArrayList<>();
-        boolean matches = false;
-
-        requestQueue = Volley.newRequestQueue(this);
-
-        String requestURL = "https://studev.groept.be/api/a21pt216/passwordCheck" + "/" + username.getText();
-
-        StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            String responseStringUsername = "";
-                            JSONArray responseArray = new JSONArray(response);
-                            for(int i = 0; i < response.length(); i++){
-                                JSONObject currentObject = responseArray.getJSONObject( i );
-                                responseStringUsername = currentObject.getString("password");
-                                passwords.add(responseStringUsername); //if possible, rewrite using lambda expressions
-                            }
-                        } catch (JSONException e) {
-                            Toast.makeText(LoginActivity.this, "Unable to communicate with the server regarding password", Toast.LENGTH_LONG).show();
-                            e.printStackTrace();
-                        }
-                    }
-                },
-
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(LoginActivity.this, "Unable to communicate with the server regarding password", Toast.LENGTH_LONG).show();
-                    }
-                }
-        );
-        requestQueue.add(submitRequest);
-
-        if (passwords.contains(password)) {
-            matches = true;
-        }
-        return matches;
-    }*/
 }

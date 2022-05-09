@@ -151,7 +151,7 @@ public class SignupActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         String SUBMIT_URL = "https://studev.groept.be/api/a21pt216/SignUp2";
-        String requestURL = SUBMIT_URL + "/" + username.getText() + "/" + null + "/" + null + "/" + null + "/" + null + "/" + null;
+        String requestURL = SUBMIT_URL + "/" + username.getText() + "/" + "0" + "/" + "0" + "/" + "0" + "/" + "0" + "/" + "0";
 
         StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
                 new Response.Listener<String>() {
