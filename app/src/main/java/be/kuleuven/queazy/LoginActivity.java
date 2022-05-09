@@ -13,6 +13,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -40,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onBtnLogIn_Clicked(View caller){
+ /*   public void onBtnLogIn_Clicked(View caller){
         if (!usernameExists()) {
             Toast.makeText(LoginActivity.this, "Incorrect username", Toast.LENGTH_SHORT).show();
         } else if(!passwordMatch()) {
@@ -49,32 +50,41 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MenuActivity.class);
             startActivity(intent);
         }
-    }
+    }*/
 
-    public boolean usernameExists() {
-        EditText username = (EditText) findViewById(R.id.txtUsername);
-        String newUsername = String.valueOf(username);
-        ArrayList<String> usernames = new ArrayList<>();
-        boolean exist = true;
+    public void onBtnLogIn_Clicked(View caller) {
+        EditText textUsername = (EditText) findViewById(R.id.txtUsername);
+        EditText textPassword = (EditText) findViewById(R.id.Password);
+
+        String username = String.valueOf(textUsername.getText());
+        String password = String.valueOf(textPassword.getText());
+
 
         requestQueue = Volley.newRequestQueue(this);
 
-        String requestURL = "https://studev.groept.be/api/a21pt216/usernameCheck";
+        String SUBMIT_URL = "https://studev.groept.be/api/a21pt216/loginCheck/";
 
-        StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
-                new Response.Listener<String>() {
+        String requestURL = SUBMIT_URL + username + "/" + password;
+
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(JSONArray response) {
+
+                        String responseStringUsername = "";
+                        String responseStringPassword = "";
+
                         try {
-                            String responseStringUsername = "";
-                            JSONArray responseArray = new JSONArray(response);
-                            for(int i = 0; i < response.length(); i++){
-                                JSONObject currentObject = responseArray.getJSONObject( i );
-                                responseStringUsername = currentObject.getString("username");
-                                usernames.add(responseStringUsername); //if possible, rewrite using lambda expressions
+                            JSONObject responseObject = response.getJSONObject(0);
+                            responseStringUsername = responseObject.getString("username");
+                            responseStringPassword = responseObject.getString("password");
+
+                            if(responseStringUsername.equals(username) && responseStringPassword.equals(password)){
+                                Intent intent = new Intent(caller.getContext(), MenuActivity.class);
+                                startActivity(intent);
                             }
                         } catch (JSONException e) {
-                            Toast.makeText(LoginActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Incorrect username or password", Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
                     }
@@ -86,20 +96,21 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show();
                     }
                 }
-        );
-        requestQueue.add(submitRequest);
 
-        if (!usernames.contains(newUsername))
-            exist = false;
-        return exist;
+        );
+
+        requestQueue.add(submitRequest);
+        System.out.println("reached here");
+
+
     }
 
-    public boolean passwordMatch() {
+    /*public boolean passwordMatch() {
         EditText pwrd = (EditText) findViewById(R.id.Password);
         EditText username = (EditText) findViewById(R.id.txtUsername);
-        String password = String.valueOf(pwrd);
+        String password = String.valueOf(pwrd.getText());
         ArrayList<String> passwords = new ArrayList<>();
-        boolean unique = true;
+        boolean matches = false;
 
         requestQueue = Volley.newRequestQueue(this);
 
@@ -118,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                                 passwords.add(responseStringUsername); //if possible, rewrite using lambda expressions
                             }
                         } catch (JSONException e) {
-                            Toast.makeText(LoginActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Unable to communicate with the server regarding password", Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
                     }
@@ -127,14 +138,15 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(LoginActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "Unable to communicate with the server regarding password", Toast.LENGTH_LONG).show();
                     }
                 }
         );
         requestQueue.add(submitRequest);
 
-        if (!passwords.contains(password))
-            unique = false;
-        return unique;
-    }
+        if (passwords.contains(password)) {
+            matches = true;
+        }
+        return matches;
+    }*/
 }

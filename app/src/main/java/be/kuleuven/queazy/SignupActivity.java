@@ -78,7 +78,7 @@ public class SignupActivity extends AppCompatActivity {
 
     public boolean uniqueUsername() {
         EditText username = (EditText) findViewById(R.id.txtUsernameCreate);
-        String newUsername = String.valueOf(username);
+        String newUsername = String.valueOf(username.getText());
         ArrayList<String> usernames = new ArrayList<>();
         boolean unique = true;
 
