@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnSignUpSuggestion;
     private Button btnLogIn;
     private RequestQueue requestQueue;
+    private TextView username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
     public void onBtnLogIn_Clicked(View caller) {
         EditText textUsername = (EditText) findViewById(R.id.txtUsername);
         EditText textPassword = (EditText) findViewById(R.id.Password);
-
         String username = String.valueOf(textUsername.getText());
         String password = String.valueOf(textPassword.getText());
 
@@ -69,8 +70,11 @@ public class LoginActivity extends AppCompatActivity {
                             responseStringPassword = responseObject.getString("password");
 
                             if(responseStringUsername.equals(username) && responseStringPassword.equals(password)){
-                                Intent intent = new Intent(caller.getContext(), MenuActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                                intent.putExtra("username", username);
                                 startActivity(intent);
+                                Intent intent2 = new Intent(caller.getContext(), MenuActivity.class);
+                                startActivity(intent2);
                             }
                         } catch (JSONException e) {
                             Toast.makeText(LoginActivity.this, "Incorrect username or password", Toast.LENGTH_LONG).show();

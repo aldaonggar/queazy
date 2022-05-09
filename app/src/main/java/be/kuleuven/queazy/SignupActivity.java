@@ -97,9 +97,10 @@ public class SignupActivity extends AppCompatActivity {
                                 JSONObject currentObject = responseArray.getJSONObject( i );
                                 responseStringUsername = currentObject.getString("username");
                                 usernames.add(responseStringUsername); //if possible, rewrite using lambda expressions
+                                Toast.makeText(SignupActivity.this, "Sign up successful", Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
-                            Toast.makeText(SignupActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignupActivity.this, "Unable to communicate with the server1", Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
                     }
