@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/purple_500"
+    android:textAlignment="center"
+    android:textDirection="anyRtl"
     tools:context=".AddQuestion1Activity">
 
     <Button
@@ -135,13 +137,13 @@
         app:layout_constraintVertical_bias="0.904" />
 
     <Button
-        android:id="@+id/btnBackToAddQuizNamePage"
-        android:layout_width="50dp"
+        android:id="@+id/btnCancel"
+        android:layout_width="100dp"
         android:layout_height="50dp"
-        android:backgroundTint="#FFC107"
-        android:onClick="onBtnBackToAddQuizNamePage_Clicked"
-        android:rotationY="180"
-        android:text="➜"
+        android:backgroundTint="#F44336"
+        android:onClick="onBtnCancel_Clicked"
+        android:text="CANCEL"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"

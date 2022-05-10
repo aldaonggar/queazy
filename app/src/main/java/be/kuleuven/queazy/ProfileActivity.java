@@ -14,7 +14,7 @@ public class ProfileActivity extends AppCompatActivity {
     private Button btnBackToMenuPage;
     private Button btnPersonalDetails;
     private TextView username;
-
+    private String un;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,8 +24,8 @@ public class ProfileActivity extends AppCompatActivity {
         btnBackToMenuPage = (Button) findViewById(R.id.btnBackToMenuPage2);
         btnPersonalDetails = (Button) findViewById(R.id.btnPersonalDetails);
         username =  (TextView) findViewById(R.id.txtUsername3);
-        Intent intent = getIntent();
-        String un = intent.getStringExtra("username");
+
+        un = getIntent().getExtras().getString("username");
         username.setText(un);
     }
 

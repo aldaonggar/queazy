@@ -11,7 +11,7 @@ public class AddQuestion3Activity extends AppCompatActivity {
 
     private Button btnAddQuestion;
     private Button btnAddQuiz;
-    private Button btnBackToAddQuestion2Page;
+    private Button btnCancel3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class AddQuestion3Activity extends AppCompatActivity {
         setContentView(R.layout.activity_add_question3);
         btnAddQuestion = (Button) findViewById(R.id.btnAddQuestion3);
         btnAddQuiz = (Button) findViewById(R.id.btnAddQuiz3);
-        btnBackToAddQuestion2Page = (Button) findViewById(R.id.btnBackToAddQuestion2Page);
+        btnCancel3 = (Button) findViewById(R.id.btnCancel3);
     }
 
     public void onBtnAddQuestion3_Clicked(View caller){
@@ -32,8 +32,8 @@ public class AddQuestion3Activity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onBtnBackToAddQuestion2Page_Clicked(View caller){
-        Intent intent = new Intent(this, AddQuestion2Activity.class);
+    public void onBtnCancel3_Clicked(View caller){
+        Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
     }
 

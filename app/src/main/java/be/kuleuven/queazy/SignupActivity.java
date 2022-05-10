@@ -28,6 +28,7 @@ public class SignupActivity extends AppCompatActivity {
     private Button btnSignUp;
     private Button btnBackToLoginPage;
     private RequestQueue requestQueue;
+    private boolean unique;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
         btnBackToLoginPage = (Button) findViewById(R.id.btnBackToLoginPage);
+        unique = true;
     }
 
     public void onBtnBackToLoginPage_Clicked(View caller){
@@ -45,7 +47,7 @@ public class SignupActivity extends AppCompatActivity {
     public void onBtnSignUp_Clicked(View caller){
         if (passwordLength() && passwordMatching() && uniqueUsername()) {
             signup();
-            signup2();
+            //signup2();
             Intent intent = new Intent(this, MenuActivity.class);
             startActivity(intent);
         } else if (!uniqueUsername()) {
@@ -80,7 +82,6 @@ public class SignupActivity extends AppCompatActivity {
         EditText username = (EditText) findViewById(R.id.txtUsernameCreate);
         String newUsername = String.valueOf(username.getText());
         ArrayList<String> usernames = new ArrayList<>();
-        boolean unique = true;
 
         requestQueue = Volley.newRequestQueue(this);
 
@@ -97,8 +98,9 @@ public class SignupActivity extends AppCompatActivity {
                                 JSONObject currentObject = responseArray.getJSONObject( i );
                                 responseStringUsername = currentObject.getString("username");
                                 usernames.add(responseStringUsername); //if possible, rewrite using lambda expressions
-                                Toast.makeText(SignupActivity.this, "Sign up successful", Toast.LENGTH_LONG).show();
                             }
+                            if (usernames.contains(newUsername))
+                                unique = false;
                         } catch (JSONException e) {
                             Toast.makeText(SignupActivity.this, "Unable to communicate with the server1", Toast.LENGTH_LONG).show();
                             e.printStackTrace();
@@ -115,8 +117,6 @@ public class SignupActivity extends AppCompatActivity {
         );
         requestQueue.add(submitRequest);
 
-        if (usernames.contains(newUsername))
-            unique = false;
         return unique;
     }
 
@@ -146,6 +146,8 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
+    /*
+
     public void signup2() {
         EditText username = (EditText) findViewById(R.id.txtUsernameCreate);
 
@@ -166,6 +168,9 @@ public class SignupActivity extends AppCompatActivity {
         );
         requestQueue.add(submitRequest);
     }
+
+
+     */
 }
 
 

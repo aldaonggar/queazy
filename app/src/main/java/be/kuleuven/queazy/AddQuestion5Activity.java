@@ -10,14 +10,14 @@ import android.widget.Button;
 public class AddQuestion5Activity extends AppCompatActivity {
 
     private Button btnAddQuiz;
-    private Button btnBackToAddQuestion4Page;
+    private Button btnCancel5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_question5);
         btnAddQuiz = (Button) findViewById(R.id.btnAddQuiz5);
-        btnBackToAddQuestion4Page = (Button) findViewById(R.id.btnBackToAddQuestion4Page);
+        btnCancel5 = (Button) findViewById(R.id.btnCancel5);
     }
 
     public void onBtnAddQuiz5_Clicked(View caller){
@@ -25,8 +25,8 @@ public class AddQuestion5Activity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onBtnBackToAddQuestion4Page_Clicked(View caller){
-        Intent intent = new Intent(this, AddQuestion4Activity.class);
+    public void onBtnCancel5_Clicked(View caller){
+        Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
     }
 

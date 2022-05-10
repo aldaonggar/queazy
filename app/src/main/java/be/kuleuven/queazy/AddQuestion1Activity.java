@@ -12,7 +12,7 @@ public class AddQuestion1Activity extends AppCompatActivity {
 
     private Button btnAddQuestion;
     private Button btnAddQuiz;
-    private Button btnBackToAddQuizNamePage;
+    private Button btnCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class AddQuestion1Activity extends AppCompatActivity {
         setContentView(R.layout.activity_add_question1);
         btnAddQuestion = (Button) findViewById(R.id.btnAddQuestion1);
         btnAddQuiz = (Button) findViewById(R.id.btnAddQuiz1);
-        btnBackToAddQuizNamePage = (Button) findViewById(R.id.btnBackToAddQuizNamePage);
+        btnCancel = (Button) findViewById(R.id.btnCancel);
     }
 
     public void onBtnAddQuestion1_Clicked(View caller){
@@ -33,8 +33,8 @@ public class AddQuestion1Activity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onBtnBackToAddQuizNamePage_Clicked(View caller){
-        Intent intent = new Intent(this, AddQuizNameActivity.class);
+    public void onBtnCancel_Clicked(View caller){
+        Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
     }
 
