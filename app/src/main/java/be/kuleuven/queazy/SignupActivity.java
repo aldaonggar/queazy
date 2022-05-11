@@ -27,8 +27,9 @@ public class SignupActivity extends AppCompatActivity {
 
     private Button btnSignUp;
     private Button btnBackToLoginPage;
+    private int usersWithSameName;
     private RequestQueue requestQueue;
-    private boolean unique;
+    private boolean uniqueUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,15 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
         btnBackToLoginPage = (Button) findViewById(R.id.btnBackToLoginPage);
-        unique = true;
+        EditText textUsername = (EditText) findViewById(R.id.txtUsernameCreate);
+        textUsername.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b){
+                    uniqueUsernameCheck();
+                }
+            }
+        });
     }
 
     public void onBtnBackToLoginPage_Clicked(View caller){
@@ -45,12 +54,25 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void onBtnSignUp_Clicked(View caller){
-        if (passwordLength() && passwordMatching() && uniqueUsername()) {
+        uniqueUsernameCheck();
+        uniqueUser = false;
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if(usersWithSameName == 0){
+            uniqueUser = true;
+        }
+        else{
+            uniqueUser = false;
+        }
+        if (passwordLength() && passwordMatching() && uniqueUser) {
             signup();
             //signup2();
             Intent intent = new Intent(this, MenuActivity.class);
             startActivity(intent);
-        } else if (!uniqueUsername()) {
+        } else if (!uniqueUser) {
             Toast.makeText(SignupActivity.this, "This username already exists", Toast.LENGTH_SHORT).show();
         } else if (!passwordMatching()) {
             Toast.makeText(SignupActivity.this, "Passwords must match", Toast.LENGTH_SHORT).show();
@@ -78,31 +100,33 @@ public class SignupActivity extends AppCompatActivity {
             return false;
     }
 
-    public boolean uniqueUsername() {
-        EditText username = (EditText) findViewById(R.id.txtUsernameCreate);
-        String newUsername = String.valueOf(username.getText());
-        ArrayList<String> usernames = new ArrayList<>();
+    public void uniqueUsernameCheck(){
 
         requestQueue = Volley.newRequestQueue(this);
 
-        String requestURL = "https://studev.groept.be/api/a21pt216/usernameCheck";
+        String REQUEST_URL = "https://studev.groept.be/api/a21pt216/sameusername/";
 
-        StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
+        EditText textUsername = (EditText) findViewById(R.id.txtUsernameCreate);
+        String un = String.valueOf(textUsername.getText());
+
+        String SUBMIT_URL = REQUEST_URL + un;
+
+        StringRequest submitRequest = new StringRequest(Request.Method.GET, SUBMIT_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         try {
                             String responseStringUsername = "";
                             JSONArray responseArray = new JSONArray(response);
-                            for(int i = 0; i < response.length(); i++){
+                            for(int i=0;i<responseArray.length();i++){
                                 JSONObject currentObject = responseArray.getJSONObject( i );
-                                responseStringUsername = currentObject.getString("username");
-                                usernames.add(responseStringUsername); //if possible, rewrite using lambda expressions
+                                responseStringUsername = currentObject.getString("COUNT(*)");
+                                usersWithSameName = Integer.valueOf(responseStringUsername);
                             }
-                            if (usernames.contains(newUsername))
-                                unique = false;
+
                         } catch (JSONException e) {
-                            Toast.makeText(SignupActivity.this, "Unable to communicate with the server1", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignupActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
                     }
@@ -114,10 +138,9 @@ public class SignupActivity extends AppCompatActivity {
                         Toast.makeText(SignupActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show();
                     }
                 }
+
         );
         requestQueue.add(submitRequest);
-
-        return unique;
     }
 
     public void signup() {
