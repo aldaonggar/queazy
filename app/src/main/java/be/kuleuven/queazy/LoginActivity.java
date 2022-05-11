@@ -28,7 +28,12 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnSignUpSuggestion;
     private Button btnLogIn;
     private RequestQueue requestQueue;
-    private TextView username;
+    //private TextView username;
+
+    private static String value;
+    public static String getValue() {
+        return value;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +75,10 @@ public class LoginActivity extends AppCompatActivity {
                             responseStringPassword = responseObject.getString("password");
 
                             if(responseStringUsername.equals(username) && responseStringPassword.equals(password)){
-                                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                                intent.putExtra("username", username);
-                                startActivity(intent);
+                                //Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                                //intent.putExtra("username", username);
+                                //startActivity(intent);
+                                value = textUsername.getText().toString().trim();
                                 Intent intent2 = new Intent(caller.getContext(), MenuActivity.class);
                                 startActivity(intent2);
                             }

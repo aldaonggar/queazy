@@ -25,8 +25,8 @@ public class ProfileActivity extends AppCompatActivity {
         btnPersonalDetails = (Button) findViewById(R.id.btnPersonalDetails);
         username =  (TextView) findViewById(R.id.txtUsername3);
 
-        un = getIntent().getExtras().getString("username");
-        username.setText(un);
+        //un = getIntent().getExtras().getString("username");
+        username.setText(LoginActivity.getValue());
     }
 
     public void onBtnLogOut2_Clicked(View caller){
