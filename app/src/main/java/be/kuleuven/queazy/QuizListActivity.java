@@ -28,7 +28,6 @@ import org.json.JSONObject;
 public class QuizListActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
-    private static final String QUEUE_URL = "https://studev.groept.be/api/a21pt216/quizName";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +35,10 @@ public class QuizListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz_list);
         LinearLayout myLayout = findViewById(R.id.llQuizList);
 
-
+        String requestURL = "https://studev.groept.be/api/a21pt216/quizName";
         requestQueue = Volley.newRequestQueue(this);
 
-        JsonArrayRequest queueRequest = new JsonArrayRequest(Request.Method.GET, QUEUE_URL, null,
+        JsonArrayRequest queueRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
                 response -> {
 
                     String quizname = "";
@@ -48,19 +47,19 @@ public class QuizListActivity extends AppCompatActivity {
                         try {
                             o = response.getJSONObject(i);
                             quizname += o.get("quizname");
+                            Button myButton = new Button(this);
+                            myButton.setLayoutParams(new LinearLayout.LayoutParams(
+                                    1000,
+                                    LinearLayout.LayoutParams.MATCH_PARENT
+                            ));
+                            myButton.setTextColor(0xFFFFFFFF);
+                            myButton.setBackgroundColor(0xFFFFC107);
+                            myButton.setText(quizname);
+                            myButton.setX(40);
+                            myLayout.addView(myButton);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-                        Button myButton = new Button(this);
-                        myButton.setLayoutParams(new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.MATCH_PARENT
-                        ));
-                        myButton.setTextColor(0x6200EE);
-                        myButton.setText(quizname);
-                        myLayout.addView(myButton);
-
                     }
 
                 },
@@ -73,6 +72,7 @@ public class QuizListActivity extends AppCompatActivity {
                 }
 
         );
+        requestQueue.add(queueRequest);
 
     }
 

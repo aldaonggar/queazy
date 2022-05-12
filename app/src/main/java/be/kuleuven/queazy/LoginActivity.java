@@ -61,27 +61,24 @@ public class LoginActivity extends AppCompatActivity {
         String requestURL = SUBMIT_URL + username + "/" + password;
 
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
+                response ->  {
 
-                        String responseStringUsername = "";
-                        String responseStringPassword = "";
+                    String responseStringUsername = "";
+                    String responseStringPassword = "";
 
-                        try {
-                            JSONObject responseObject = response.getJSONObject(0);
-                            responseStringUsername = responseObject.getString("username");
-                            responseStringPassword = responseObject.getString("password");
+                    try {
+                        JSONObject responseObject = response.getJSONObject(0);
+                        responseStringUsername = responseObject.getString("username");
+                        responseStringPassword = responseObject.getString("password");
 
-                            if(responseStringUsername.equals(username) && responseStringPassword.equals(password)){
-                                value = textUsername.getText().toString().trim();
-                                Intent intent2 = new Intent(caller.getContext(), MenuActivity.class);
-                                startActivity(intent2);
-                            }
-                        } catch (JSONException e) {
-                            Toast.makeText(LoginActivity.this, "Incorrect username or password", Toast.LENGTH_LONG).show();
-                            e.printStackTrace();
+                        if(responseStringUsername.equals(username) && responseStringPassword.equals(password)){
+                            value = textUsername.getText().toString().trim();
+                            Intent intent2 = new Intent(caller.getContext(), MenuActivity.class);
+                            startActivity(intent2);
                         }
+                    } catch (JSONException e) {
+                        Toast.makeText(LoginActivity.this, "Incorrect username or password", Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
                     }
                 },
 
