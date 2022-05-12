@@ -3,6 +3,7 @@ package be.kuleuven.queazy;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintSet;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -39,32 +40,29 @@ public class QuizListActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         JsonArrayRequest queueRequest = new JsonArrayRequest(Request.Method.GET, QUEUE_URL, null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
+                response -> {
 
-                        String quizname = "";
-                        for (int i = 0; i < response.length(); i++) {
-                            JSONObject o = null;
-                            try {
-                                o = response.getJSONObject(i);
-                                quizname += o.get("quizname");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            /*
-                            Button myButton = new Button();
-                            myButton.setLayoutParams(new LinearLayout.LayoutParams(
-                                    LinearLayout.LayoutParams.MATCH_PARENT,
-                                    LinearLayout.LayoutParams.MATCH_PARENT
-                            ));
-                            myButton.setTextColor(0x6200EE);
-                            myButton.setText(quizname);
-                            myLayout.addView(myButton);
-                            */
+                    String quizname = "";
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject o = null;
+                        try {
+                            o = response.getJSONObject(i);
+                            quizname += o.get("quizname");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
 
+                        Button myButton = new Button(this);
+                        myButton.setLayoutParams(new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.MATCH_PARENT
+                        ));
+                        myButton.setTextColor(0x6200EE);
+                        myButton.setText(quizname);
+                        myLayout.addView(myButton);
+
                     }
+
                 },
 
                 new Response.ErrorListener() {

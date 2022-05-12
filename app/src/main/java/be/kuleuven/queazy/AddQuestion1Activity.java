@@ -41,8 +41,6 @@ public class AddQuestion1Activity extends AppCompatActivity {
     }
 
     public void onBtnCancel_Clicked(View caller){
-        //Intent intent = new Intent(this, MenuActivity.class);
-        //startActivity(intent);
         createNewContactDialog();
     }
 
