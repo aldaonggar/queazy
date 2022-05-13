@@ -82,12 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 },
 
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(LoginActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show();
-                    }
-                }
+                error -> Toast.makeText(LoginActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
 
         );
 

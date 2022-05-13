@@ -25,6 +25,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.SQLOutput;
+
 public class QuizListActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
@@ -41,22 +43,33 @@ public class QuizListActivity extends AppCompatActivity {
         JsonArrayRequest queueRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
                 response -> {
 
-                    String quizname = "";
                     for (int i = 0; i < response.length(); i++) {
                         JSONObject o = null;
                         try {
+
                             o = response.getJSONObject(i);
-                            quizname += o.get("quizname");
+                            String quizname = o.getString("quizname");
+                            int quizID = o.getInt("id");
                             Button myButton = new Button(this);
+
                             myButton.setLayoutParams(new LinearLayout.LayoutParams(
                                     1000,
                                     LinearLayout.LayoutParams.MATCH_PARENT
                             ));
+
                             myButton.setTextColor(0xFFFFFFFF);
                             myButton.setBackgroundColor(0xFFFFC107);
                             myButton.setText(quizname);
                             myButton.setX(40);
                             myLayout.addView(myButton);
+
+                            myButton.setOnClickListener((view) -> {
+                                Intent intent = new Intent(this, QuizActivity.class);
+                                intent.putExtra("quizID", quizID);
+                                intent.putExtra("questionNr", 1);
+                                startActivity(intent);
+                            });
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -64,12 +77,7 @@ public class QuizListActivity extends AppCompatActivity {
 
                 },
 
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(QuizListActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show();
-                    }
-                }
+                error -> Toast.makeText(QuizListActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
 
         );
         requestQueue.add(queueRequest);

@@ -38,12 +38,9 @@ public class SignupActivity extends AppCompatActivity {
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
         btnBackToLoginPage = (Button) findViewById(R.id.btnBackToLoginPage);
         EditText textUsername = (EditText) findViewById(R.id.txtUsernameCreate);
-        textUsername.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if(!b){
-                    uniqueUsernameCheck();
-                }
+        textUsername.setOnFocusChangeListener((view, b) -> {
+            if(!b){
+                uniqueUsernameCheck();
             }
         });
     }
@@ -112,32 +109,24 @@ public class SignupActivity extends AppCompatActivity {
         String SUBMIT_URL = REQUEST_URL + un;
 
         StringRequest submitRequest = new StringRequest(Request.Method.GET, SUBMIT_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+                response -> {
 
-                        try {
-                            String responseStringUsername = "";
-                            JSONArray responseArray = new JSONArray(response);
-                            for(int i=0;i<responseArray.length();i++){
-                                JSONObject currentObject = responseArray.getJSONObject( i );
-                                responseStringUsername = currentObject.getString("COUNT(*)");
-                                usersWithSameName = Integer.valueOf(responseStringUsername);
-                            }
-
-                        } catch (JSONException e) {
-                            Toast.makeText(SignupActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show();
-                            e.printStackTrace();
+                    try {
+                        String responseStringUsername = "";
+                        JSONArray responseArray = new JSONArray(response);
+                        for(int i=0;i<responseArray.length();i++){
+                            JSONObject currentObject = responseArray.getJSONObject( i );
+                            responseStringUsername = currentObject.getString("COUNT(*)");
+                            usersWithSameName = Integer.valueOf(responseStringUsername);
                         }
+
+                    } catch (JSONException e) {
+                        Toast.makeText(SignupActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
                     }
                 },
 
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(SignupActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show();
-                    }
-                }
+                error -> Toast.makeText(SignupActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
 
         );
         requestQueue.add(submitRequest);
@@ -154,15 +143,9 @@ public class SignupActivity extends AppCompatActivity {
         String requestURL = SUBMIT_URL + "/" + fullname.getText() + "/" + username.getText() + "/" + password.getText();
 
         StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                    }
+                response -> {
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                    }
+                error -> {
                 }
         );
         requestQueue.add(submitRequest);
