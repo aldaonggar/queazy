@@ -22,7 +22,9 @@ public class QuizActivity extends AppCompatActivity {
     private int questionNr;
     private RequestQueue requestQueue;
     private Button btnAnswer1, btnAnswer2, btnAnswer3, btnAnswer4;
-    private TextView txtQuestionDB;
+    private TextView txtQuestionDB, txtCorrectOrWrong;
+
+    private int iscorrect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class QuizActivity extends AppCompatActivity {
         btnAnswer3 = (Button) findViewById(R.id.btnAnswer3);
         btnAnswer4 = (Button) findViewById(R.id.btnAnswer4);
         txtQuestionDB = (TextView) findViewById(R.id.txtQuestionDB);
+        txtCorrectOrWrong = (TextView) findViewById(R.id.txtCorrectOrWrong);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -53,6 +56,7 @@ public class QuizActivity extends AppCompatActivity {
                         JSONObject o = response.getJSONObject(i);
                         String question = o.getString("question");
                         String answer = o.getString("answer");
+                        iscorrect = o.getInt("iscorrect");
                         txtQuestionDB.setText(question);
                         BtnSetText(i, answer);
                     } catch (JSONException e) {
@@ -64,6 +68,7 @@ public class QuizActivity extends AppCompatActivity {
         );
         requestQueue.add(submitRequest);
     }
+
 
     public void BtnSetText(int i, String ans) {
         if (i == 0) {
@@ -87,9 +92,19 @@ public class QuizActivity extends AppCompatActivity {
     public void onBtnAnsClicked(Button myButton) {
         myButton.setOnClickListener((view) -> {
             Intent intent = new Intent(this, QuizActivity.class);
-            intent.putExtra("quizID", quizID);
-            intent.putExtra("questionNr", questionNr + 1);
-            startActivity(intent);
+
+            if(iscorrect == 1){
+                txtCorrectOrWrong.setText("CORRECT!");
+                txtCorrectOrWrong.setTextColor(0x00FF0A);
+                intent.putExtra("quizID", quizID);
+                intent.putExtra("questionNr", questionNr + 1);
+                startActivity(intent);}
+            else if(iscorrect == 0) {
+                txtCorrectOrWrong.setText("TRY AGAIN!");
+                txtCorrectOrWrong.setTextColor(0xFF0000);
+            }
+
         });
     }
+
 }

@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -49,6 +51,7 @@ public class QuizListActivity extends AppCompatActivity {
 
                             o = response.getJSONObject(i);
                             String quizname = o.getString("quizname");
+                            String difficulty = o.getString("difficulty");
                             int quizID = o.getInt("id");
                             Button myButton = new Button(this);
 
@@ -69,6 +72,19 @@ public class QuizListActivity extends AppCompatActivity {
                                 intent.putExtra("questionNr", 1);
                                 startActivity(intent);
                             });
+
+                            TextView myText = new TextView(this);
+
+                            myText.setLayoutParams(new LinearLayout.LayoutParams(
+                                    1000,
+                                    LinearLayout.LayoutParams.MATCH_PARENT
+                            ));
+
+                            myText.setTextColor(0xFFFFFFFF);
+                            myText.setText("Difficulty: " + difficulty);
+                            myText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            myText.setPadding(0,0,0,50);
+                            myLayout.addView(myText);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
