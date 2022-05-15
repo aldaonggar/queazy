@@ -2,12 +2,16 @@ package be.kuleuven.queazy;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.customview.widget.ViewDragHelper;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.Gravity;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,10 +24,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class QuizActivity extends AppCompatActivity {
-    private int quizID, questionNr, points, counter;
+    private int quizID, questionNr, points;
     private RequestQueue requestQueue;
     private Button btnAnswer1, btnAnswer2, btnAnswer3, btnAnswer4;
-    private TextView txtQuestionDB, txtPointsAdded, txtTimer;
+    private TextView txtQuestionDB, txtTimer;
+    private CountDownTimer timer;
 
     private int[] iscorrect;
 
@@ -42,8 +47,8 @@ public class QuizActivity extends AppCompatActivity {
         btnAnswer3 = (Button) findViewById(R.id.btnAnswer3);
         btnAnswer4 = (Button) findViewById(R.id.btnAnswer4);
         txtQuestionDB = (TextView) findViewById(R.id.txtQuestionDB);
-        txtPointsAdded = (TextView) findViewById(R.id.txtPointsAdded);
         txtTimer = (TextView) findViewById(R.id.txtTimer);
+        points = 100;
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -77,17 +82,18 @@ public class QuizActivity extends AppCompatActivity {
         requestQueue.add(submitRequest);
 
 
-        CountDownTimer timer = new CountDownTimer(25000, 1000) {
+        timer = new CountDownTimer(25000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 txtTimer.setText("Time: " + millisUntilFinished/1000);
+                points -= 2;
             }
 
             public void onFinish(){
                 txtTimer.setText("TIME OVER");
+                createNewContactDialog(33);
             }
         }.start();
-
 
     }
 
@@ -115,33 +121,64 @@ public class QuizActivity extends AppCompatActivity {
         myButton.setOnClickListener((view) -> {
             if(iscorrect[i] == 1){
                 myButton.setBackgroundColor(0xFF2FFF00);
-                txtPointsAdded.setText("Points earned: +");
             }
             else if(iscorrect[i] == 0) {
                 myButton.setBackgroundColor(0xFFFF0000);
-                txtPointsAdded.setText("Points earned: +0");
             }
-            createNewContactDialog();
+            createNewContactDialog(iscorrect[i]);
         });
     }
 
-    public void createNewContactDialog(){
+    public void createNewContactDialog(int correctness){
+
+        timer.cancel();
+
         dialogBuilder = new AlertDialog.Builder(this);
         final View contactPopupView = getLayoutInflater().inflate(R.layout.popupquizover, null);
         txtQuizOver = (TextView) contactPopupView.findViewById(R.id.txtQuizOver);
         btnPopupOk = (Button) contactPopupView.findViewById(R.id.btnPopupOk);
 
+        /*LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        layoutParams.setMargins(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                500,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        contactPopupView.setLayoutParams(layoutParams);*/
+        /*
+        Сделай так чтобы попап выходил нижеб чтобы игрок мог видеть правильно или неправильно он ответил. (В закомментированном коде сверху у меня нихуя не получилось)
+        А дальше можешь начать делать что нам нужно сделать, тип скидывать поинты в датабэйз, название badge придумать, итд.
+         */
+        if (correctness == 1)
+            txtQuizOver.setText("Correct answer" + "\n" + "Points earned: " + Integer.toString(points));
+        else if (correctness == 0) {
+            points = 0;
+            txtQuizOver.setText("Wrong answer" + "\n" + "Points earned: " + Integer.toString(points));
+        } else {
+            points = 0;
+            txtQuizOver.setText("Out of time" + "\n" + "Points earned: " + Integer.toString(points));
+        }
         dialogBuilder.setView(contactPopupView);
         dialog = dialogBuilder.create();
         dialog.show();
 
+
+        onBtnPopUpClicked(btnPopupOk);
+
+    }
+
+    public void onBtnPopUpClicked(Button btnOk) {
+
         Intent intent = new Intent(this, QuizActivity.class);
         Intent intent2 = new Intent(this, QuizListActivity.class);
 
-        btnPopupOk.setOnClickListener(new View.OnClickListener() {
+        btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //define button
                 if (questionNr < 5) {
                     intent.putExtra("quizID", quizID);
                     intent.putExtra("questionNr", questionNr + 1);
@@ -151,27 +188,6 @@ public class QuizActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
-
-    /*
-    public void moveToNext() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        if (questionNr < 5) {
-            Intent intent = new Intent(this, QuizActivity.class);
-            intent.putExtra("quizID", quizID);
-            intent.putExtra("questionNr", questionNr + 1);
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(this, MenuActivity.class);
-            startActivity(intent);
-        }
-    }
-
-     */
 
 }

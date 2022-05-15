@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/purple_500"
     android:orientation="horizontal">
 
 
@@ -16,6 +17,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="35dp"
         android:text="Are you sure? Your questions will not be saved"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btnPopupCancel"
@@ -30,6 +32,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
+        android:backgroundTint="#FFC107"
         android:text="CANCEL"
         app:layout_constraintEnd_toStartOf="@+id/btnPopupBackToMenu"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,6 +45,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="100dp"
+        android:backgroundTint="#FFC107"
         android:text="BACK TO MENU"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnPopupCancel"

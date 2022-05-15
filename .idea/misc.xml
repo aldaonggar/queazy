@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/asus/Desktop/year 3/sem2 y3/prog techniques/queazy/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.248" />
         <entry key="..\:/Users/asus/Desktop/year 3/sem2 y3/prog techniques/queazy/app/src/main/res/layout/activity_add_question1.xml" value="0.2" />
         <entry key="..\:/Users/asus/Desktop/year 3/sem2 y3/prog techniques/queazy/app/src/main/res/layout/activity_add_question2.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/asus/Desktop/year 3/sem2 y3/prog techniques/queazy/app/src/main/res/layout/activity_add_question3.xml" value="0.18432971014492755" />
@@ -13,19 +12,24 @@
         <entry key="..\:/Users/asus/Desktop/year 3/sem2 y3/prog techniques/queazy/app/src/main/res/layout/activity_login.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/asus/Desktop/year 3/sem2 y3/prog techniques/queazy/app/src/main/res/layout/activity_menu.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/asus/Desktop/year 3/sem2 y3/prog techniques/queazy/app/src/main/res/layout/activity_personal_details.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/asus/Desktop/year 3/sem2 y3/prog techniques/queazy/app/src/main/res/layout/activity_profile.xml" value="0.2" />
+        <entry key="..\:/Users/asus/Desktop/year 3/sem2 y3/prog techniques/queazy/app/src/main/res/layout/activity_profile.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/asus/Desktop/year 3/sem2 y3/prog techniques/queazy/app/src/main/res/layout/activity_quiz.xml" value="0.25" />
-        <entry key="..\:/Users/asus/Desktop/year 3/sem2 y3/prog techniques/queazy/app/src/main/res/layout/activity_quiz_list.xml" value="0.2" />
+        <entry key="..\:/Users/asus/Desktop/year 3/sem2 y3/prog techniques/queazy/app/src/main/res/layout/activity_quiz_list.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/asus/Desktop/year 3/sem2 y3/prog techniques/queazy/app/src/main/res/layout/activity_rankings.xml" value="0.2421875" />
         <entry key="..\:/Users/asus/Desktop/year 3/sem2 y3/prog techniques/queazy/app/src/main/res/layout/activity_signup.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/asus/Desktop/year 3/sem2 y3/prog techniques/queazy/app/src/main/res/layout/popup.xml" value="0.2421875" />
-        <entry key="..\:/Users/asus/Desktop/year 3/sem2 y3/prog techniques/queazy/app/src/main/res/layout/popupquizover.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/user/Desktop/KU LEUVEN/ProgrammingTechniques/queazy/app/src/main/res/layout/activity_add_quiz.xml" value="0.3546875" />
         <entry key="..\:/Users/user/Desktop/KU LEUVEN/ProgrammingTechniques/queazy/app/src/main/res/layout/activity_add_quiz_name.xml" value="0.3546875" />
         <entry key="..\:/Users/user/Desktop/KU LEUVEN/ProgrammingTechniques/queazy/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/user/Desktop/KU LEUVEN/ProgrammingTechniques/queazy/app/src/main/res/layout/activity_main.xml" value="0.3546875" />
         <entry key="..\:/Users/user/Desktop/KU LEUVEN/ProgrammingTechniques/queazy/app/src/main/res/layout/activity_menu.xml" value="0.3546875" />
+        <entry key="..\:/Users/user/Desktop/KU LEUVEN/ProgrammingTechniques/queazy/app/src/main/res/layout/activity_personal_details.xml" value="0.3546875" />
+        <entry key="..\:/Users/user/Desktop/KU LEUVEN/ProgrammingTechniques/queazy/app/src/main/res/layout/activity_profile.xml" value="0.3546875" />
+        <entry key="..\:/Users/user/Desktop/KU LEUVEN/ProgrammingTechniques/queazy/app/src/main/res/layout/activity_quiz.xml" value="0.3546875" />
+        <entry key="..\:/Users/user/Desktop/KU LEUVEN/ProgrammingTechniques/queazy/app/src/main/res/layout/activity_quiz_list.xml" value="0.3546875" />
         <entry key="..\:/Users/user/Desktop/KU LEUVEN/ProgrammingTechniques/queazy/app/src/main/res/layout/activity_signup.xml" value="0.3546875" />
+        <entry key="..\:/Users/user/Desktop/KU LEUVEN/ProgrammingTechniques/queazy/app/src/main/res/layout/popup.xml" value="0.3546875" />
+        <entry key="..\:/Users/user/Desktop/KU LEUVEN/ProgrammingTechniques/queazy/app/src/main/res/layout/popupquizover.xml" value="0.3546875" />
       </map>
     </option>
   </component>
