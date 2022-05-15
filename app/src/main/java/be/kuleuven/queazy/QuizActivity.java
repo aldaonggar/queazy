@@ -1,5 +1,6 @@
 package be.kuleuven.queazy;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -25,6 +26,11 @@ public class QuizActivity extends AppCompatActivity {
     private TextView txtQuestionDB, txtPointsAdded, txtTimer;
 
     private int[] iscorrect;
+
+    private AlertDialog.Builder dialogBuilder;
+    private AlertDialog dialog;
+    private TextView txtQuizOver;
+    private Button btnPopupOk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +76,19 @@ public class QuizActivity extends AppCompatActivity {
         );
         requestQueue.add(submitRequest);
 
+
+        CountDownTimer timer = new CountDownTimer(25000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                txtTimer.setText("Time: " + millisUntilFinished/1000);
+            }
+
+            public void onFinish(){
+                txtTimer.setText("TIME OVER");
+            }
+        }.start();
+
+
     }
 
 
@@ -102,10 +121,40 @@ public class QuizActivity extends AppCompatActivity {
                 myButton.setBackgroundColor(0xFFFF0000);
                 txtPointsAdded.setText("Points earned: +0");
             }
-            moveToNext();
+            createNewContactDialog();
         });
     }
 
+    public void createNewContactDialog(){
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View contactPopupView = getLayoutInflater().inflate(R.layout.popupquizover, null);
+        txtQuizOver = (TextView) contactPopupView.findViewById(R.id.txtQuizOver);
+        btnPopupOk = (Button) contactPopupView.findViewById(R.id.btnPopupOk);
+
+        dialogBuilder.setView(contactPopupView);
+        dialog = dialogBuilder.create();
+        dialog.show();
+
+        Intent intent = new Intent(this, QuizActivity.class);
+        Intent intent2 = new Intent(this, QuizListActivity.class);
+
+        btnPopupOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //define button
+                if (questionNr < 5) {
+                    intent.putExtra("quizID", quizID);
+                    intent.putExtra("questionNr", questionNr + 1);
+                    startActivity(intent);
+                } else {
+                    startActivity(intent2);
+                }
+            }
+        });
+
+    }
+
+    /*
     public void moveToNext() {
         try {
             Thread.sleep(2000);
@@ -122,5 +171,7 @@ public class QuizActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+     */
 
 }
