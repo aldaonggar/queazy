@@ -17,7 +17,7 @@ public class AddQuizNameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_quiz_name);
         btnAddQuestions = (Button) findViewById(R.id.btnAddQuestions);
-        btnBackToMenuPage = (Button) findViewById(R.id.btnBackToMenuPage);
+        btnBackToMenuPage = (Button) findViewById(R.id.btnBackToMenuPage4);
     }
 
     public void onBtnAddQuestions_Clicked(View caller){
@@ -25,7 +25,7 @@ public class AddQuizNameActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onBtnBackToMenuPage_Clicked(View caller){
+    public void onBtnBackToMenuPage4_Clicked(View caller){
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
     }

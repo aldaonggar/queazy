@@ -29,6 +29,7 @@ public class QuizActivity extends AppCompatActivity {
     private Button btnAnswer1, btnAnswer2, btnAnswer3, btnAnswer4;
     private TextView txtQuestionDB, txtTimer;
     private CountDownTimer timer;
+    private String username;
 
     private int[] iscorrect;
 
@@ -50,6 +51,7 @@ public class QuizActivity extends AppCompatActivity {
         txtTimer = (TextView) findViewById(R.id.txtTimer);
         points = 100;
 
+        username = LoginActivity.getValue();
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             quizID = extras.getInt("quizID");
@@ -69,7 +71,6 @@ public class QuizActivity extends AppCompatActivity {
                         String question = o.getString("question");
                         String answer = o.getString("answer");
                         iscorrect[i] = o.getInt("iscorrect");
-                        System.out.println(iscorrect);
                         txtQuestionDB.setText(question);
                         BtnSetText(i, answer);
                     } catch (JSONException e) {
@@ -138,24 +139,11 @@ public class QuizActivity extends AppCompatActivity {
         txtQuizOver = (TextView) contactPopupView.findViewById(R.id.txtQuizOver);
         btnPopupOk = (Button) contactPopupView.findViewById(R.id.btnPopupOk);
 
-        /*LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-        layoutParams.setMargins(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                500,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-        contactPopupView.setLayoutParams(layoutParams);*/
-        /*
-        Сделай так чтобы попап выходил нижеб чтобы игрок мог видеть правильно или неправильно он ответил. (В закомментированном коде сверху у меня нихуя не получилось)
-        А дальше можешь начать делать что нам нужно сделать, тип скидывать поинты в датабэйз, название badge придумать, итд.
-         */
-        if (correctness == 1)
+
+        if (correctness == 1) {
             txtQuizOver.setText("Correct answer" + "\n" + "Points earned: " + Integer.toString(points));
-        else if (correctness == 0) {
+            getUsersPoints();
+        } else if (correctness == 0) {
             points = 0;
             txtQuizOver.setText("Wrong answer" + "\n" + "Points earned: " + Integer.toString(points));
         } else {
@@ -190,4 +178,38 @@ public class QuizActivity extends AppCompatActivity {
         });
     }
 
+    public void getUsersPoints() {
+        requestQueue = Volley.newRequestQueue(this);
+
+        String requestURL = "https://studev.groept.be/api/a21pt216/points/" + username;
+
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+                response -> {
+                    for(int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject o = response.getJSONObject(i);
+                            int totalPoints = o.getInt("totalpoints");
+                            totalPoints += points;
+                            updateUsersPoints(totalPoints);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                error -> Toast.makeText(QuizActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
+        );
+        requestQueue.add(submitRequest);
+    }
+
+    public void updateUsersPoints(int totalPoints){
+        requestQueue = Volley.newRequestQueue(this);
+
+        String requestURL = "https://studev.groept.be/api/a21pt216/pointsAddition/" + totalPoints + "/" + username;
+
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+                response -> {},
+                error -> Toast.makeText(QuizActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
+        );
+        requestQueue.add(submitRequest);
+    }
 }
