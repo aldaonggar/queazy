@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import be.kuleuven.queazy.models.CurrentUser;
+
 public class ProfileActivity extends AppCompatActivity {
 
     private Button btnLogOut2;
@@ -20,15 +22,16 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        btnLogOut2 = (Button) findViewById(R.id.btnLogOut2);
+        btnLogOut2 = (Button) findViewById(R.id.btnLogOut);
         btnBackToMenuPage = (Button) findViewById(R.id.btnBackToMenuPage2);
         btnPersonalDetails = (Button) findViewById(R.id.btnPersonalDetails);
         username =  (TextView) findViewById(R.id.txtUsername3);
 
-        username.setText(LoginActivity.getValue());
+        username.setText(CurrentUser.getCurrentUser());
     }
 
-    public void onBtnLogOut2_Clicked(View caller){
+    public void onBtnLogOut_Clicked(View caller){
+        CurrentUser.logOut();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }

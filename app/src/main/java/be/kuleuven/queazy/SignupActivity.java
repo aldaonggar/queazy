@@ -23,6 +23,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import be.kuleuven.queazy.models.CurrentUser;
+
 public class SignupActivity extends AppCompatActivity {
 
     private Button btnSignUp;
@@ -67,6 +69,9 @@ public class SignupActivity extends AppCompatActivity {
         if (passwordLength() && passwordMatching() && uniqueUser) {
             signup();
             //signup2();
+            EditText textUsername = (EditText) findViewById(R.id.txtUsernameCreate);
+            String user = String.valueOf(textUsername.getText());
+            CurrentUser.setCurrentUser(user);
             Intent intent = new Intent(this, MenuActivity.class);
             startActivity(intent);
         } else if (!uniqueUser) {

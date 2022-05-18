@@ -8,12 +8,12 @@
     tools:context=".ProfileActivity">
 
     <Button
-        android:id="@+id/btnLogOut2"
+        android:id="@+id/btnLogOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="56dp"
         android:backgroundTint="#FFC107"
-        android:onClick="onBtnLogOut2_Clicked"
+        android:onClick="onBtnLogOut_Clicked"
         android:text="log out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

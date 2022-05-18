@@ -24,15 +24,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import be.kuleuven.queazy.models.CurrentUser;
+
 public class LoginActivity extends AppCompatActivity {
     private Button btnSignUpSuggestion;
     private Button btnLogIn;
     private RequestQueue requestQueue;
 
-    private static String value;
-    public static String getValue() {
-        return value;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                         responseStringPassword = responseObject.getString("password");
 
                         if(responseStringUsername.equals(username) && responseStringPassword.equals(password)){
-                            value = textUsername.getText().toString().trim();
+                            CurrentUser.setCurrentUser(username);
                             Intent intent2 = new Intent(caller.getContext(), MenuActivity.class);
                             startActivity(intent2);
                         }

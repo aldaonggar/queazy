@@ -29,6 +29,8 @@ import org.json.JSONObject;
 
 import java.sql.SQLOutput;
 
+import be.kuleuven.queazy.models.CurrentQuiz;
+
 public class QuizListActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
@@ -70,6 +72,7 @@ public class QuizListActivity extends AppCompatActivity {
                                 Intent intent = new Intent(this, QuizActivity.class);
                                 intent.putExtra("quizID", quizID);
                                 intent.putExtra("questionNr", 1);
+                                new CurrentQuiz();
                                 startActivity(intent);
                             });
 

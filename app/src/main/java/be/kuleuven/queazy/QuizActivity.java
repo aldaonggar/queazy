@@ -23,6 +23,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import be.kuleuven.queazy.models.CurrentQuiz;
+import be.kuleuven.queazy.models.CurrentUser;
+
 public class QuizActivity extends AppCompatActivity {
     private int quizID, questionNr, points;
     private RequestQueue requestQueue;
@@ -43,6 +46,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        username = CurrentUser.getCurrentUser();
         btnAnswer1 = (Button) findViewById(R.id.btnAnswer1);
         btnAnswer2 = (Button) findViewById(R.id.btnAnswer2);
         btnAnswer3 = (Button) findViewById(R.id.btnAnswer3);
@@ -51,7 +55,7 @@ public class QuizActivity extends AppCompatActivity {
         txtTimer = (TextView) findViewById(R.id.txtTimer);
         points = 100;
 
-        username = LoginActivity.getValue();
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             quizID = extras.getInt("quizID");
@@ -121,6 +125,7 @@ public class QuizActivity extends AppCompatActivity {
     public void onBtnAnsClicked(Button myButton, int i) {
         myButton.setOnClickListener((view) -> {
             if(iscorrect[i] == 1){
+                CurrentQuiz.incrementCorrectAnswers();
                 myButton.setBackgroundColor(0xFF2FFF00);
             }
             else if(iscorrect[i] == 0) {
@@ -142,7 +147,7 @@ public class QuizActivity extends AppCompatActivity {
 
         if (correctness == 1) {
             txtQuizOver.setText("Correct answer" + "\n" + "Points earned: " + Integer.toString(points));
-            getUsersPoints();
+            updateUsersPoints();
         } else if (correctness == 0) {
             points = 0;
             txtQuizOver.setText("Wrong answer" + "\n" + "Points earned: " + Integer.toString(points));
@@ -159,52 +164,44 @@ public class QuizActivity extends AppCompatActivity {
 
     }
 
-    public void onBtnPopUpClicked(Button btnOk) {
-
-        Intent intent = new Intent(this, QuizActivity.class);
-        Intent intent2 = new Intent(this, QuizListActivity.class);
-
-        btnOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (questionNr < 5) {
-                    intent.putExtra("quizID", quizID);
-                    intent.putExtra("questionNr", questionNr + 1);
-                    startActivity(intent);
-                } else {
-                    startActivity(intent2);
-                }
-            }
-        });
-    }
-
-    public void getUsersPoints() {
+    public void updateUsersPoints(){
         requestQueue = Volley.newRequestQueue(this);
 
-        String requestURL = "https://studev.groept.be/api/a21pt216/points/" + username;
+        String requestURL = "https://studev.groept.be/api/a21pt216/pointsAddition/" + points + "/" + username;
 
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
-                response -> {
-                    for(int i = 0; i < response.length(); i++) {
-                        try {
-                            JSONObject o = response.getJSONObject(i);
-                            int totalPoints = o.getInt("totalpoints");
-                            totalPoints += points;
-                            updateUsersPoints(totalPoints);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
+                response -> {},
                 error -> Toast.makeText(QuizActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
         );
         requestQueue.add(submitRequest);
     }
 
-    public void updateUsersPoints(int totalPoints){
+    public void onBtnPopUpClicked(Button btnOk) {
+
+        Intent intent = new Intent(this, QuizActivity.class);
+        Intent intent2 = new Intent(this, QuizListActivity.class);
+
+        btnOk.setOnClickListener(view -> {
+            if (questionNr < 5) {
+                intent.putExtra("quizID", quizID);
+                intent.putExtra("questionNr", questionNr + 1);
+                startActivity(intent);
+            } else {
+                updateUsersAttendance();
+                startActivity(intent2);
+            }
+        });
+    }
+
+    public void updateUsersAttendance() {
         requestQueue = Volley.newRequestQueue(this);
 
-        String requestURL = "https://studev.groept.be/api/a21pt216/pointsAddition/" + totalPoints + "/" + username;
+        int correctAns = CurrentQuiz.getCorrectAnswers();
+        int qp = 0;
+        if (correctAns == 5)
+            qp = 1;
+
+        String requestURL = "https://studev.groept.be/api/a21pt216/updateQuizAttendance/" + qp + "/" + 1 + "/" + username;
 
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
                 response -> {},

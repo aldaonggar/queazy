@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import be.kuleuven.queazy.models.CurrentUser;
+
 public class MenuActivity extends AppCompatActivity {
     private Button btnLogOut;
     private Button btnAddQuizSuggestion;
@@ -29,11 +31,6 @@ public class MenuActivity extends AppCompatActivity {
         ibProfile = (ImageButton) findViewById(R.id.ibProfile);
         btnQuizzes = (Button) findViewById(R.id.btnQuizzes);
         btnRankings = (Button) findViewById(R.id.btnRankings);
-    }
-
-    public void onBtnLogOut_Clicked(View caller){
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
     }
 
     public void onBtnQuizzes_Clicked(View caller){
