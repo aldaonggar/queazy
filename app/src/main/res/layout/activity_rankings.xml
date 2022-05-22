@@ -17,14 +17,14 @@
         tools:ignore="SpeakableTextPresentCheck">
 
         <LinearLayout
-            android:id="@+id/llQuizList"
+            android:id="@+id/llRankings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
     </ScrollView>
 
     <TextView
-        android:id="@+id/txtQuizList"
+        android:id="@+id/txtRankings"
         android:layout_width="226dp"
         android:layout_height="28dp"
         android:layout_marginStart="155dp"
