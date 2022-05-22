@@ -135,4 +135,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
+    <TextView
+        android:id="@+id/txtQuizzesPassedValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="44dp"
+        android:textColor="#000000"
+        app:layout_constraintStart_toEndOf="@+id/txtQuizzesPassed"
+        app:layout_constraintTop_toBottomOf="@+id/btnPersonalDetails" />
+
+    <TextView
+        android:id="@+id/txtPointsValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toEndOf="@+id/txtQuizzesPassed"
+        app:layout_constraintTop_toBottomOf="@+id/txtQuizzesPassedValue" />
+
+    <TextView
+        android:id="@+id/txtBadgeValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="28dp"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@+id/txtQuizzesPassed"
+        app:layout_constraintTop_toBottomOf="@+id/txtPointsValue" />
+
+    <TextView
+        android:id="@+id/txtRankValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="28dp"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@+id/txtQuizzesPassed"
+        app:layout_constraintTop_toBottomOf="@+id/txtBadgeValue" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

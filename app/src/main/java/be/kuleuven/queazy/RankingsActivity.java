@@ -71,6 +71,7 @@ public class RankingsActivity extends AppCompatActivity {
         requestQueue.add(queueRequest);
     }
 
+
     public void setBtnCharacteristics(LinearLayout row, int j) {
 
         Button myButton = new Button(this);
