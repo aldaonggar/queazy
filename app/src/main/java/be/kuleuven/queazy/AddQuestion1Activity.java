@@ -68,6 +68,11 @@ public class AddQuestion1Activity extends AppCompatActivity implements AddQuesti
             btnAddQuestion.setClickable(false);
         }
 
+        if(questionNr < 5) {
+            btnAddQuiz.setVisibility(View.INVISIBLE);
+            btnAddQuiz.setClickable(false);
+        }
+
         Toast.makeText(AddQuestion1Activity.this, "Question " + questionNr, Toast.LENGTH_LONG).show();
     }
 
