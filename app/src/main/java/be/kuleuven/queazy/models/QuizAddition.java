@@ -21,4 +21,13 @@ public class QuizAddition {
     public static void setDifficulty(String diff) {
         difficulty = diff;
     }
+
+    public static void addQuestion(String qs){ q.add(qs); }
+
+    public static void addCorrectAns(String corAns) { correctAns.add(corAns); }
+
+    public static void addAnswers(ArrayList<String> answers) {
+        for (int i = 0 ; i < answers.size(); i++)
+            ans.add(answers.get(i));
+    }
 }

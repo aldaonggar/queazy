@@ -8,9 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
-public class AddQuestion1Activity extends AppCompatActivity {
+import be.kuleuven.queazy.models.AddQuestion;
+
+public class AddQuestion1Activity extends AppCompatActivity implements AddQuestion {
 
     private Button btnAddQuestion;
     private Button btnAddQuiz;
@@ -19,6 +24,8 @@ public class AddQuestion1Activity extends AppCompatActivity {
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
     private TextView txtAreYouSure;
+    private EditText txtQuestion, txtA, txtB, txtC, txtD;
+    private RadioGroup rgAns;
     private Button btnPopupBackToMenu, btnPopupCancel;
 
     @Override
@@ -28,10 +35,37 @@ public class AddQuestion1Activity extends AppCompatActivity {
         btnAddQuestion = (Button) findViewById(R.id.btnAddQuestion1);
         btnAddQuiz = (Button) findViewById(R.id.btnAddQuiz1);
         btnCancel = (Button) findViewById(R.id.btnCancel);
+        txtQuestion = (EditText) findViewById(R.id.txtWriteQuestion1);
+        txtA = (EditText) findViewById(R.id.txtA1);
+        txtB = (EditText) findViewById(R.id.txtB1);
+        txtC = (EditText) findViewById(R.id.txtC1);
+        txtD = (EditText) findViewById(R.id.txtD1);
+        rgAns = (RadioGroup) findViewById(R.id.rgAns);
+    }
+
+    @Override
+    public boolean TxtfieldsCheck() {
+        String qs = txtQuestion.getText().toString();
+        String ansA = txtA.getText().toString();
+        String ansB = txtB.getText().toString();
+        String ansC = txtC.getText().toString();
+        String ansD = txtD.getText().toString();
+        RadioButton selectedBtn = (RadioButton) findViewById(rgAns.getCheckedRadioButtonId());
+        String checkedBtn = selectedBtn.getText().toString();
+        if (!qs.equals("") && !ansA.equals("") && !ansB.equals("") && !ansC.equals("") && !ansD.equals("") && !checkedBtn.equals(""))
+            return true;
+        return false;
+    }
+
+    @Override
+    public String getCorAns() {
+        RadioButton selectedBtn = (RadioButton) findViewById(rgAns.getCheckedRadioButtonId());
+        String checkedBtn = selectedBtn.getText().toString();
+        return checkedBtn;
     }
 
     public void onBtnAddQuestion1_Clicked(View caller){
-        Intent intent = new Intent(this, AddQuestion2Activity.class);
+        Intent intent = new Intent(this, AddQuestion1Activity.class);
         startActivity(intent);
     }
 
@@ -58,7 +92,6 @@ public class AddQuestion1Activity extends AppCompatActivity {
         btnPopupCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //define button
                 dialog.dismiss();
             }
         });
@@ -73,5 +106,4 @@ public class AddQuestion1Activity extends AppCompatActivity {
         });
 
     }
-
 }

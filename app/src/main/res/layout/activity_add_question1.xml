@@ -168,6 +168,7 @@
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/rgAns"
         android:background="#FFC107"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/btnAddQuestion1"

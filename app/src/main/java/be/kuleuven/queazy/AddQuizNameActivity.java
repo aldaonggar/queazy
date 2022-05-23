@@ -34,7 +34,7 @@ public class AddQuizNameActivity extends AppCompatActivity {
         String qn = txtQuizName.getText().toString();
         if (quizNameCheck(qn)) {
             QuizAddition.setQuizName(qn);
-            QuizAddition.setDifficulty(qn);
+            QuizAddition.setDifficulty(diff);
             Intent intent = new Intent(this, AddQuestion1Activity.class);
             startActivity(intent);
         } else {
