@@ -30,8 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
     private int ranking;
     private String badge;
     private String un;
-    private int rank;
-    private String badge2;
+    private int quizzesPassed;
     private TextView txtQuizzesPassedValue;
     private TextView txtPointsValue;
     private TextView txtBadgeValue;
@@ -66,10 +65,14 @@ public class ProfileActivity extends AppCompatActivity {
                             ranking = i + 1;
                             un = o.getString("username");
                             badge = o.getString("badge");
+                            quizzesPassed = o.getInt("quizzespassed");
+                            totalpoints = o.getInt("totalpoints");
 
                             if (un.equals(CurrentUser.getCurrentUser())) {
                                 this.txtBadgeValue.setText(badge);
                                 this.txtRankValue.setText(String.valueOf(ranking));
+                                this.txtQuizzesPassedValue.setText(String.valueOf(quizzesPassed));
+                                this.txtPointsValue.setText(String.valueOf(totalpoints));
                             }
 
                         } catch (JSONException e) {
