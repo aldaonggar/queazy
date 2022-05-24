@@ -28,8 +28,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 
 import be.kuleuven.queazy.models.CurrentQuiz;
+import be.kuleuven.queazy.models.CurrentUser;
 
 public class QuizListActivity extends AppCompatActivity {
 
@@ -72,8 +74,7 @@ public class QuizListActivity extends AppCompatActivity {
                                 Intent intent = new Intent(this, QuizActivity.class);
                                 intent.putExtra("quizID", quizID);
                                 intent.putExtra("questionNr", 1);
-                                new CurrentQuiz();
-                                startActivity(intent);
+                                checkPassedQuery(quizID, intent);
                             });
 
                             TextView myText = new TextView(this);
@@ -103,6 +104,40 @@ public class QuizListActivity extends AppCompatActivity {
 
     }
 
+    public void checkPassedQuery(int id, Intent intent) {
+        String username = CurrentUser.getCurrentUser();
+
+        requestQueue = Volley.newRequestQueue(this);
+
+        String requestURL = "https://studev.groept.be/api/a21pt216/getPassedQuizzes/" + username;
+        ArrayList<Integer> responseIDs = new ArrayList<>();
+
+        JsonArrayRequest queueRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+                response -> {
+
+                    for(int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject o = response.getJSONObject(i);
+                            responseIDs.add(o.getInt("quizid"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    checkPassed(intent, responseIDs, id);
+                },
+                error -> Toast.makeText(QuizListActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
+        );
+        requestQueue.add(queueRequest);
+    }
+
+    public void checkPassed(Intent intent, ArrayList<Integer> IDs, int id) {
+        if (IDs.contains(id))
+            Toast.makeText(QuizListActivity.this, "You've already done this quiz", Toast.LENGTH_LONG).show();
+        else {
+            new CurrentQuiz();
+            startActivity(intent);
+        }
+    }
 
     public void onBtnBackToMenuPage_Clicked(View caller){
         Intent intent = new Intent(this, MenuActivity.class);

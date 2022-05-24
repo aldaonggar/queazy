@@ -37,9 +37,9 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        btnSignUp = (Button) findViewById(R.id.btnSignUp);
-        btnBackToLoginPage = (Button) findViewById(R.id.btnBackToLoginPage);
-        EditText textUsername = (EditText) findViewById(R.id.txtUsernameCreate);
+        btnSignUp = findViewById(R.id.btnSignUp);
+        btnBackToLoginPage = findViewById(R.id.btnBackToLoginPage);
+        EditText textUsername = findViewById(R.id.txtUsernameCreate);
         textUsername.setOnFocusChangeListener((view, b) -> {
             if(!b){
                 uniqueUsernameCheck();
@@ -60,16 +60,11 @@ public class SignupActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if(usersWithSameName == 0){
-            uniqueUser = true;
-        }
-        else{
-            uniqueUser = false;
-        }
+        uniqueUser = usersWithSameName == 0;
         if (passwordLength() && passwordMatching() && uniqueUser) {
             signup();
-            //signup2();
-            EditText textUsername = (EditText) findViewById(R.id.txtUsernameCreate);
+            signup2();
+            EditText textUsername = findViewById(R.id.txtUsernameCreate);
             String user = String.valueOf(textUsername.getText());
             CurrentUser.setCurrentUser(user);
             Intent intent = new Intent(this, MenuActivity.class);
@@ -83,23 +78,17 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public boolean passwordLength() {
-        EditText password = (EditText) findViewById(R.id.txtPasswordCreate);
+        EditText password = findViewById(R.id.txtPasswordCreate);
         String pwrd = String.valueOf(password.getText());
-        if (pwrd.length() >= 8)
-            return true;
-        else
-            return false;
+        return pwrd.length() >= 8;
     }
 
     public boolean passwordMatching() {
-        EditText password = (EditText) findViewById(R.id.txtPasswordCreate);
-        EditText repeatPassword = (EditText) findViewById(R.id.txtPasswordCreate2);
+        EditText password = findViewById(R.id.txtPasswordCreate);
+        EditText repeatPassword = findViewById(R.id.txtPasswordCreate2);
         String pwrd = String.valueOf(password.getText());
         String rpwrd = String.valueOf((repeatPassword.getText()));
-        if (pwrd.equals(rpwrd))
-            return true;
-        else
-            return false;
+        return pwrd.equals(rpwrd);
     }
 
     public void uniqueUsernameCheck(){
@@ -108,7 +97,7 @@ public class SignupActivity extends AppCompatActivity {
 
         String REQUEST_URL = "https://studev.groept.be/api/a21pt216/sameusername/";
 
-        EditText textUsername = (EditText) findViewById(R.id.txtUsernameCreate);
+        EditText textUsername = findViewById(R.id.txtUsernameCreate);
         String un = String.valueOf(textUsername.getText());
 
         String SUBMIT_URL = REQUEST_URL + un;
@@ -138,9 +127,9 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void signup() {
-        EditText username = (EditText) findViewById(R.id.txtUsernameCreate);
-        EditText fullname = (EditText) findViewById(R.id.txtNameCreate);
-        EditText password = (EditText) findViewById(R.id.txtPasswordCreate);
+        EditText username = findViewById(R.id.txtUsernameCreate);
+        EditText fullname = findViewById(R.id.txtNameCreate);
+        EditText password = findViewById(R.id.txtPasswordCreate);
 
         requestQueue = Volley.newRequestQueue(this);
 
@@ -148,40 +137,32 @@ public class SignupActivity extends AppCompatActivity {
         String requestURL = SUBMIT_URL + "/" + fullname.getText() + "/" + username.getText() + "/" + password.getText();
 
         StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
-                response -> {
-                },
-                error -> {
-                }
+                response -> {},
+                error -> Toast.makeText(SignupActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
         );
         requestQueue.add(submitRequest);
 
     }
 
-    /*
+
 
     public void signup2() {
-        EditText username = (EditText) findViewById(R.id.txtUsernameCreate);
+        EditText username = findViewById(R.id.txtUsernameCreate);
 
         requestQueue = Volley.newRequestQueue(this);
 
         String SUBMIT_URL = "https://studev.groept.be/api/a21pt216/SignUp2";
-        String requestURL = SUBMIT_URL + "/" + username.getText() + "/" + "0" + "/" + "0" + "/" + "0" + "/" + "0" + "/" + "0";
+        String requestURL = SUBMIT_URL + "/" + username.getText() + "/" + 0 + "/" + "Newbie" + "/" + 0 + "/" + 0;
 
         StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {}
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {}
-                }
+                response -> {},
+                error -> Toast.makeText(SignupActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
         );
         requestQueue.add(submitRequest);
     }
 
 
-     */
+
 }
 
 

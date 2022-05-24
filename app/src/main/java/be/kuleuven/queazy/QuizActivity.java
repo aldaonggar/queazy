@@ -47,12 +47,12 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
 
         username = CurrentUser.getCurrentUser();
-        btnAnswer1 = (Button) findViewById(R.id.btnAnswer1);
-        btnAnswer2 = (Button) findViewById(R.id.btnAnswer2);
-        btnAnswer3 = (Button) findViewById(R.id.btnAnswer3);
-        btnAnswer4 = (Button) findViewById(R.id.btnAnswer4);
-        txtQuestionDB = (TextView) findViewById(R.id.txtQuestionDB);
-        txtTimer = (TextView) findViewById(R.id.txtTimer);
+        btnAnswer1 = findViewById(R.id.btnAnswer1);
+        btnAnswer2 = findViewById(R.id.btnAnswer2);
+        btnAnswer3 = findViewById(R.id.btnAnswer3);
+        btnAnswer4 = findViewById(R.id.btnAnswer4);
+        txtQuestionDB = findViewById(R.id.txtQuestionDB);
+        txtTimer = findViewById(R.id.txtTimer);
         points = 100;
 
 
@@ -141,19 +141,19 @@ public class QuizActivity extends AppCompatActivity {
 
         dialogBuilder = new AlertDialog.Builder(this);
         final View contactPopupView = getLayoutInflater().inflate(R.layout.popupquizover, null);
-        txtQuizOver = (TextView) contactPopupView.findViewById(R.id.txtQuizOver);
-        btnPopupOk = (Button) contactPopupView.findViewById(R.id.btnPopupOk);
+        txtQuizOver = contactPopupView.findViewById(R.id.txtQuizOver);
+        btnPopupOk = contactPopupView.findViewById(R.id.btnPopupOk);
 
 
         if (correctness == 1) {
-            txtQuizOver.setText("Correct answer" + "\n" + "Points earned: " + Integer.toString(points));
+            txtQuizOver.setText("Correct answer" + "\n" + "Points earned: " + points);
             updateUsersPoints();
         } else if (correctness == 0) {
             points = 0;
-            txtQuizOver.setText("Wrong answer" + "\n" + "Points earned: " + Integer.toString(points));
+            txtQuizOver.setText("Wrong answer" + "\n" + "Points earned: " + points);
         } else {
             points = 0;
-            txtQuizOver.setText("Out of time" + "\n" + "Points earned: " + Integer.toString(points));
+            txtQuizOver.setText("Out of time" + "\n" + "Points earned: " + points);
         }
         dialogBuilder.setView(contactPopupView);
         dialog = dialogBuilder.create();
@@ -198,10 +198,24 @@ public class QuizActivity extends AppCompatActivity {
 
         int correctAns = CurrentQuiz.getCorrectAnswers();
         int qp = 0;
-        if (correctAns == 5)
+        if (correctAns == 5) {
             qp = 1;
+            addPassedQuiz();
+        }
 
         String requestURL = "https://studev.groept.be/api/a21pt216/updateQuizAttendance/" + qp + "/" + 1 + "/" + username;
+
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+                response -> {},
+                error -> Toast.makeText(QuizActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
+        );
+        requestQueue.add(submitRequest);
+    }
+
+    public void addPassedQuiz() {
+        requestQueue = Volley.newRequestQueue(this);
+
+        String requestURL = "https://studev.groept.be/api/a21pt216/addPassedQuiz/" + username + "/" + quizID;
 
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
                 response -> {},
