@@ -24,7 +24,6 @@ public class ProfileActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private Button btnLogOut2;
     private Button btnBackToMenuPage;
-    private Button btnPersonalDetails;
     private TextView username;
     private int totalpoints;
     private int ranking;
@@ -42,14 +41,13 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        btnLogOut2 = (Button) findViewById(R.id.btnLogOut);
-        btnBackToMenuPage = (Button) findViewById(R.id.btnBackToMenuPage2);
-        btnPersonalDetails = (Button) findViewById(R.id.btnPersonalDetails);
-        username = (TextView) findViewById(R.id.txtUsername3);
-        txtQuizzesPassedValue = (TextView) findViewById(R.id.txtQuizzesPassedValue);
-        txtPointsValue = (TextView) findViewById(R.id.txtPointsValue);
-        txtBadgeValue = (TextView) findViewById(R.id.txtBadgeValue);
-        txtRankValue = (TextView) findViewById(R.id.txtRankValue);
+        btnLogOut2 = findViewById(R.id.btnLogOut);
+        btnBackToMenuPage = findViewById(R.id.btnBackToMenuPage2);
+        username = findViewById(R.id.txtUsername3);
+        txtQuizzesPassedValue = findViewById(R.id.txtQuizzesPassedValue);
+        txtPointsValue = findViewById(R.id.txtPointsValue);
+        txtBadgeValue = findViewById(R.id.txtBadgeValue);
+        txtRankValue = findViewById(R.id.txtRankValue);
 
         username.setText(CurrentUser.getCurrentUser());
 
@@ -91,11 +89,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void onBtnBackToMenuPage2_Clicked(View caller){
         Intent intent = new Intent(this, MenuActivity.class);
-        startActivity(intent);
-    }
-
-    public void onBtnPersonalDetails_Clicked(View caller){
-        Intent intent = new Intent(this, PersonalDetailsActivity.class);
         startActivity(intent);
     }
 }

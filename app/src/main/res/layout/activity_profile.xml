@@ -22,20 +22,6 @@
         app:layout_constraintTop_toBottomOf="@+id/txtBadge"
         app:layout_constraintVertical_bias="0.699" />
 
-    <Button
-        android:id="@+id/btnPersonalDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#FFC107"
-        android:onClick="onBtnPersonalDetails_Clicked"
-        android:text="Personal Details"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.389" />
-
     <TextView
         android:id="@+id/txtQuizzesPassed"
         android:layout_width="wrap_content"
@@ -47,10 +33,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.101"
+        app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPersonalDetails"
-        app:layout_constraintVertical_bias="0.105" />
+        app:layout_constraintTop_toBottomOf="@+id/txtUsername3"
+        app:layout_constraintVertical_bias="0.181" />
 
     <TextView
         android:id="@+id/txtPoints"
@@ -86,8 +72,9 @@
         android:id="@+id/imageView"
         android:layout_width="160dp"
         android:layout_height="190dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnPersonalDetails"
+        android:layout_marginTop="52dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -126,12 +113,13 @@
         android:id="@+id/txtUsername3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
         android:text="Username"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btnPersonalDetails"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -140,10 +128,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="44dp"
         android:textColor="#000000"
         app:layout_constraintStart_toEndOf="@+id/txtQuizzesPassed"
-        app:layout_constraintTop_toBottomOf="@+id/btnPersonalDetails" />
+        tools:layout_editor_absoluteY="358dp" />
 
     <TextView
         android:id="@+id/txtPointsValue"

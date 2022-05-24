@@ -163,11 +163,4 @@ public class AddQuestion1Activity extends AppCompatActivity implements AddQuesti
 
     }
 
-    /*public void onBtnAddQuestion1_Clicked(View caller){
-        nextActivity();
-    }
-
-    public void onBtnAddQuiz1_Clicked(View caller){
-        nextActivity();
-    }*/
 }

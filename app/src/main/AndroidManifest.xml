@@ -19,9 +19,6 @@
             android:name=".RankingsActivity"
             android:exported="false" />
         <activity
-            android:name=".PersonalDetailsActivity"
-            android:exported="false" />
-        <activity
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
