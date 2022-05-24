@@ -3,29 +3,19 @@ package be.kuleuven.queazy;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
-import be.kuleuven.queazy.models.AddQuestion;
+import be.kuleuven.queazy.interfaces.AddQuestion;
 import be.kuleuven.queazy.models.QuizAddition;
 
 public class AddQuestion1Activity extends AppCompatActivity implements AddQuestion {

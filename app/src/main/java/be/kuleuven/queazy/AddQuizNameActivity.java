@@ -19,9 +19,10 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import be.kuleuven.queazy.interfaces.BackBtn;
 import be.kuleuven.queazy.models.QuizAddition;
 
-public class AddQuizNameActivity extends AppCompatActivity {
+public class AddQuizNameActivity extends AppCompatActivity implements BackBtn {
 
     private Button btnAddQuestions;
     private Button btnBackToMenuPage;
@@ -39,6 +40,12 @@ public class AddQuizNameActivity extends AppCompatActivity {
         txtQuizName = findViewById(R.id.txtQuizNameAdd);
         spDifficulty = findViewById(R.id.spDifficulty);
         newQuiz = new QuizAddition();
+    }
+
+    @Override
+    public void onBackBtnClicked(View caller) {
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
     }
 
     public void onBtnAddQuizName_Clicked(View caller){
@@ -78,13 +85,10 @@ public class AddQuizNameActivity extends AppCompatActivity {
         );
         requestQueue.add(queueRequest);
     }
-    public void onBtnBackToMenuPage4_Clicked(View caller){
-        Intent intent = new Intent(this, MenuActivity.class);
-        startActivity(intent);
-    }
+
+
 
     public boolean quizNameCheck(String qn) {
         return !qn.equals("");
     }
-
 }
