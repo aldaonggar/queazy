@@ -2,7 +2,6 @@ package be.kuleuven.queazy.models;
 
 public class CurrentUser {
     private static String currentUser;
-    private static String currentUsername;
 
     public CurrentUser(){
         currentUser = null;

@@ -61,32 +61,38 @@ public class QuizActivity extends AppCompatActivity {
             quizID = extras.getInt("quizID");
             questionNr = extras.getInt("questionNr");
         }
+        putQuiz();
+        startTimer();
+    }
 
+    public void putQuiz() {
         requestQueue = Volley.newRequestQueue(this);
 
         String requestURL = "https://studev.groept.be/api/a21pt216/questions/" + quizID + "/" + questionNr + "/" + quizID + "/" + questionNr;
 
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
-            response -> {
-                iscorrect = new int[5];
-                for(int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject o = response.getJSONObject(i);
-                        String question = o.getString("question");
-                        String answer = o.getString("answer");
-                        iscorrect[i] = o.getInt("iscorrect");
-                        txtQuestionDB.setText(question);
-                        BtnSetText(i, answer);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                response -> {
+                    iscorrect = new int[5];
+                    for(int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject o = response.getJSONObject(i);
+                            String question = o.getString("question");
+                            String answer = o.getString("answer");
+                            iscorrect[i] = o.getInt("iscorrect");
+                            txtQuestionDB.setText(question);
+                            BtnSetText(i, answer);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-            },
-            error -> Toast.makeText(QuizActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
+                },
+                error -> Toast.makeText(QuizActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
         );
         requestQueue.add(submitRequest);
 
+    }
 
+    public void startTimer() {
         timer = new CountDownTimer(25000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -99,10 +105,7 @@ public class QuizActivity extends AppCompatActivity {
                 createNewContactDialog(33);
             }
         }.start();
-
     }
-
-
     public void BtnSetText(int i, String ans) {
         if (i == 0) {
             btnAnswer1.setText(ans);

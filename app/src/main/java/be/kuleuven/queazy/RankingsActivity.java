@@ -37,6 +37,17 @@ public class RankingsActivity extends AppCompatActivity implements BackBtn {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rankings);
+
+        putTable();
+    }
+
+    @Override
+    public void onBackBtnClicked(View caller) {
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
+    }
+
+    public void putTable() {
         LinearLayout myLayout = findViewById(R.id.llRankings);
         myLayout.setOrientation(LinearLayout.VERTICAL);
         requestQueue = Volley.newRequestQueue(this);
@@ -71,12 +82,6 @@ public class RankingsActivity extends AppCompatActivity implements BackBtn {
                 error -> Toast.makeText(RankingsActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
         );
         requestQueue.add(queueRequest);
-    }
-
-    @Override
-    public void onBackBtnClicked(View caller) {
-        Intent intent = new Intent(this, MenuActivity.class);
-        startActivity(intent);
     }
 
     public void setBtnCharacteristics(LinearLayout row, int j) {

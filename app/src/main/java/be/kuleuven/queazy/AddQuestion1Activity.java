@@ -147,9 +147,7 @@ public class AddQuestion1Activity extends AppCompatActivity implements AddQuesti
         btnPopupCancel.setOnClickListener(view -> dialog.dismiss());
 
 
-        btnPopupBackToMenu.setOnClickListener(view -> {
-            startActivity(new Intent(getApplicationContext(), MenuActivity.class));
-        });
+        btnPopupBackToMenu.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), MenuActivity.class)));
 
     }
 

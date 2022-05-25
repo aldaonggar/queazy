@@ -42,6 +42,17 @@ public class QuizListActivity extends AppCompatActivity implements BackBtn {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_list);
+
+        putQuizzes();
+    }
+
+    @Override
+    public void onBackBtnClicked(View caller) {
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
+    }
+
+    public void putQuizzes() {
         LinearLayout myLayout = findViewById(R.id.llQuizList);
 
         String requestURL = "https://studev.groept.be/api/a21pt216/quizName";
@@ -104,13 +115,6 @@ public class QuizListActivity extends AppCompatActivity implements BackBtn {
         requestQueue.add(queueRequest);
 
     }
-
-    @Override
-    public void onBackBtnClicked(View caller) {
-        Intent intent = new Intent(this, MenuActivity.class);
-        startActivity(intent);
-    }
-
     public void checkPassedQuery(int id, Intent intent) {
         String username = CurrentUser.getCurrentUser();
 

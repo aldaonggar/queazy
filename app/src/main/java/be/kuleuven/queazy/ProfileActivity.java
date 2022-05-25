@@ -123,7 +123,7 @@ public class ProfileActivity extends AppCompatActivity implements BackBtn {
                     public void onResponse(JSONArray response) {
                         try {
 
-                                JSONObject o = response.getJSONObject(response.length());
+                                JSONObject o = response.getJSONObject(response.length() - 1);
 
                                 //converting base64 string to image
                                 String b64String = o.getString("image");
