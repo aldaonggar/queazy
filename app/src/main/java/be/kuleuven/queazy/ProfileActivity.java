@@ -48,7 +48,6 @@ public class ProfileActivity extends AppCompatActivity implements BackBtn {
     private int ranking;
     private String badge;
     private String un;
-    private String uName;
     private int quizzesPassed;
     private TextView txtQuizzesPassedValue;
     private TextView txtPointsValue;
@@ -80,6 +79,7 @@ public class ProfileActivity extends AppCompatActivity implements BackBtn {
         ivAvatar = findViewById(R.id.ivAvatar);
         fabChangeAvatar = findViewById(R.id.fabChangeAvatar);
         btnSaveAvatar = findViewById(R.id.btnSaveAvatar);
+        btnSaveAvatar.setEnabled(false);
 
         username.setText(CurrentUser.getCurrentUser());
 
@@ -133,7 +133,6 @@ public class ProfileActivity extends AppCompatActivity implements BackBtn {
                                 //Link the bitmap to the ImageView, so it's visible on screen
                                 ivAvatar.setImageBitmap(bitmap2);
 
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -150,6 +149,7 @@ public class ProfileActivity extends AppCompatActivity implements BackBtn {
 
         requestQueue.add(retrieveImageRequest);
     }
+
 
     @Override
     public void onBackBtnClicked(View caller) {
@@ -175,6 +175,8 @@ public class ProfileActivity extends AppCompatActivity implements BackBtn {
 
         //this line will start the new activity and will automatically run the callback method below when the user has picked an image
         startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST);
+
+        btnSaveAvatar.setEnabled(true);
     }
 
     /**
@@ -241,6 +243,7 @@ public class ProfileActivity extends AppCompatActivity implements BackBtn {
         };
 
         requestQueue.add(submitRequest);
+        btnSaveAvatar.setEnabled(false);
     }
 
 
