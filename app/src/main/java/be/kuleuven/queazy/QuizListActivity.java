@@ -30,10 +30,11 @@ import org.json.JSONObject;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 
+import be.kuleuven.queazy.interfaces.BackBtn;
 import be.kuleuven.queazy.models.CurrentQuiz;
 import be.kuleuven.queazy.models.CurrentUser;
 
-public class QuizListActivity extends AppCompatActivity {
+public class QuizListActivity extends AppCompatActivity implements BackBtn {
 
     private RequestQueue requestQueue;
 
@@ -104,6 +105,12 @@ public class QuizListActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackBtnClicked(View caller) {
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
+    }
+
     public void checkPassedQuery(int id, Intent intent) {
         String username = CurrentUser.getCurrentUser();
 
@@ -137,10 +144,5 @@ public class QuizListActivity extends AppCompatActivity {
             new CurrentQuiz();
             startActivity(intent);
         }
-    }
-
-    public void onBtnBackToMenuPage_Clicked(View caller){
-        Intent intent = new Intent(this, MenuActivity.class);
-        startActivity(intent);
     }
 }

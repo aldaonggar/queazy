@@ -23,15 +23,15 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import be.kuleuven.queazy.interfaces.BackBtn;
 import be.kuleuven.queazy.models.CurrentUser;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity implements BackBtn {
 
     private Button btnSignUp;
     private Button btnBackToLoginPage;
     private int usersWithSameName;
     private RequestQueue requestQueue;
-    private boolean uniqueUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,38 +39,21 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         btnSignUp = findViewById(R.id.btnSignUp);
         btnBackToLoginPage = findViewById(R.id.btnBackToLoginPage);
-        EditText textUsername = findViewById(R.id.txtUsernameCreate);
-        textUsername.setOnFocusChangeListener((view, b) -> {
-            if(!b){
-                uniqueUsernameCheck();
-            }
-        });
     }
 
-    public void onBtnBackToLoginPage_Clicked(View caller){
+    @Override
+    public void onBackBtnClicked(View caller) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
     public void onBtnSignUp_Clicked(View caller){
         uniqueUsernameCheck();
-        uniqueUser = false;
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        uniqueUser = usersWithSameName == 0;
-        if (passwordLength() && passwordMatching() && uniqueUser) {
-            signup();
-            signup2();
+        if (passwordLength() && passwordMatching()) {
+            uniqueUsernameCheck();
             EditText textUsername = findViewById(R.id.txtUsernameCreate);
             String user = String.valueOf(textUsername.getText());
             CurrentUser.setCurrentUser(user);
-            Intent intent = new Intent(this, MenuActivity.class);
-            startActivity(intent);
-        } else if (!uniqueUser) {
-            Toast.makeText(SignupActivity.this, "This username already exists", Toast.LENGTH_SHORT).show();
         } else if (!passwordMatching()) {
             Toast.makeText(SignupActivity.this, "Passwords must match", Toast.LENGTH_SHORT).show();
         }
@@ -104,7 +87,6 @@ public class SignupActivity extends AppCompatActivity {
 
         StringRequest submitRequest = new StringRequest(Request.Method.GET, SUBMIT_URL,
                 response -> {
-
                     try {
                         String responseStringUsername = "";
                         JSONArray responseArray = new JSONArray(response);
@@ -113,7 +95,12 @@ public class SignupActivity extends AppCompatActivity {
                             responseStringUsername = currentObject.getString("COUNT(*)");
                             usersWithSameName = Integer.valueOf(responseStringUsername);
                         }
-
+                        if (usersWithSameName == 0) {
+                            signup();
+                            signup2();
+                        } else {
+                            Toast.makeText(SignupActivity.this, "This username already exists", Toast.LENGTH_LONG).show();
+                        }
                     } catch (JSONException e) {
                         Toast.makeText(SignupActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show();
                         e.printStackTrace();
@@ -144,8 +131,6 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
-
-
     public void signup2() {
         EditText username = findViewById(R.id.txtUsernameCreate);
 
@@ -155,13 +140,14 @@ public class SignupActivity extends AppCompatActivity {
         String requestURL = SUBMIT_URL + "/" + username.getText() + "/" + 0 + "/" + "Newbie" + "/" + 0 + "/" + 0;
 
         StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
-                response -> {},
+                response -> {
+                    Intent intent = new Intent(this, MenuActivity.class);
+                    startActivity(intent);
+                },
                 error -> Toast.makeText(SignupActivity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
         );
         requestQueue.add(submitRequest);
     }
-
-
 
 }
 

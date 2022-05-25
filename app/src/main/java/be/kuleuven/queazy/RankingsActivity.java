@@ -21,7 +21,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RankingsActivity extends AppCompatActivity {
+import be.kuleuven.queazy.interfaces.BackBtn;
+
+public class RankingsActivity extends AppCompatActivity implements BackBtn {
 
     private RequestQueue requestQueue;
     private String username;
@@ -71,6 +73,11 @@ public class RankingsActivity extends AppCompatActivity {
         requestQueue.add(queueRequest);
     }
 
+    @Override
+    public void onBackBtnClicked(View caller) {
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
+    }
 
     public void setBtnCharacteristics(LinearLayout row, int j) {
 
@@ -116,9 +123,5 @@ public class RankingsActivity extends AppCompatActivity {
         else
             myButton.setBackgroundColor(0xFFFFC107);
 
-    }
-    public void onBtnBackToMenuPage3_Clicked(View caller) {
-        Intent intent = new Intent(this, MenuActivity.class);
-        startActivity(intent);
     }
 }

@@ -17,9 +17,10 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import be.kuleuven.queazy.interfaces.BackBtn;
 import be.kuleuven.queazy.models.CurrentUser;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements BackBtn {
 
     private RequestQueue requestQueue;
     private Button btnLogOut2;
@@ -83,15 +84,16 @@ public class ProfileActivity extends AppCompatActivity {
         requestQueue.add(queueRequest);
     }
 
+    @Override
+    public void onBackBtnClicked(View caller) {
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
+    }
+
 
     public void onBtnLogOut_Clicked(View caller){
         CurrentUser.logOut();
         Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
-
-    public void onBtnBackToMenuPage2_Clicked(View caller){
-        Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
     }
 }

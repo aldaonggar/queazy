@@ -1,4 +1,4 @@
-package be.kuleuven.queazy.models;
+package be.kuleuven.queazy.interfaces;
 
 import android.view.View;
 

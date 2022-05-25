@@ -80,7 +80,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:backgroundTint="#FFC107"
-        android:onClick="onBtnBackToMenuPage2_Clicked"
+        android:onClick="onBackBtnClicked"
         android:rotationY="180"
         android:text="➜"
         app:layout_constraintBottom_toBottomOf="parent"
