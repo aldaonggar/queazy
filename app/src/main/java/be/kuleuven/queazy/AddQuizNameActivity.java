@@ -52,19 +52,13 @@ public class AddQuizNameActivity extends AppCompatActivity implements BackBtn {
         String diff = spDifficulty.getSelectedItem().toString();
         String qn = txtQuizName.getText().toString();
         if (quizNameCheck(qn)) {
-            findQuizID();
-            newQuiz.setQuizName(qn);
-            newQuiz.setDifficulty(diff);
-            Intent intent = new Intent(this, AddQuestion1Activity.class);
-            intent.putExtra("newquiz", newQuiz);
-            intent.putExtra("questionNr", 1);
-            startActivity(intent);
+            findQuizID(qn, diff);
         } else {
             Toast.makeText(AddQuizNameActivity.this, "Insert name of your quiz", Toast.LENGTH_LONG).show();
         }
     }
 
-    public void findQuizID() {
+    public void findQuizID(String qn, String diff) {
         requestQueue = Volley.newRequestQueue(this);
 
         String requestURL = "https://studev.groept.be/api/a21pt216/getLastQuizID";
@@ -76,6 +70,12 @@ public class AddQuizNameActivity extends AppCompatActivity implements BackBtn {
                         try {
                             JSONObject o = response.getJSONObject(i);
                             newQuiz.setQuizid(o.getInt("id"));
+                            newQuiz.setQuizName(qn);
+                            newQuiz.setDifficulty(diff);
+                            Intent intent = new Intent(this, AddQuestion1Activity.class);
+                            intent.putExtra("newquiz", newQuiz);
+                            intent.putExtra("questionNr", 1);
+                            startActivity(intent);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

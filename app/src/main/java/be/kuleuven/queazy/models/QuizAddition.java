@@ -23,7 +23,6 @@ public class QuizAddition implements Serializable {
     private ArrayList<String> questions, ans, correctAns;
     private String quizName, difficulty;
     private int quizid;
-    private RequestQueue requestQueue;
 
     public QuizAddition() {
         questions = new ArrayList<>();
@@ -45,7 +44,7 @@ public class QuizAddition implements Serializable {
         difficulty = diff;
     }
 
-    public void addQuestion(String qs){ questions.add(qs); }
+    public void addQuestion(String qs){ questions.add(qs);}
 
     public void addCorrectAns(String corAns) { correctAns.add(corAns); }
 
@@ -78,63 +77,4 @@ public class QuizAddition implements Serializable {
         return ans;
     }
 
-
-    public void addToDB(Context cntxt) {
-        addQuizNameToDB(cntxt);
-        addQuestionsToDB(cntxt);
-        addAnswersToDB(cntxt);
-    }
-
-    public void addQuizNameToDB(Context cntxt) {
-        requestQueue = Volley.newRequestQueue(cntxt);
-
-        String requestURL = "https://studev.groept.be/api/a21pt216/addQuizName/" + this.getQuizid() + "/" + this.getQuizName() + "/" + this.getDifficulty();
-
-        JsonArrayRequest queueRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
-                response -> {},
-                error -> Toast.makeText(cntxt, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
-        );
-        requestQueue.add(queueRequest);
-    }
-
-    public void addQuestionsToDB(Context cntxt) {
-        for (int i = 0; i < 5; i++) {
-            requestQueue = Volley.newRequestQueue(cntxt);
-            int questionID = i + 1;
-            String requestURL = "https://studev.groept.be/api/a21pt216/addQuestionsToDB/" + this.getQuizid() + "/" + questionID + "/" + this.getQuestions().get(i);
-
-            JsonArrayRequest queueRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
-                    response -> {
-                    },
-                    error -> Toast.makeText(cntxt, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
-            );
-            requestQueue.add(queueRequest);
-        }
-    }
-
-    public void addAnswersToDB(Context cntxt) {
-        String ansID = "A";
-        for (int i = 0; i < 20; i++) {
-            int questionID = (i/4) + 1;
-
-            if (i % 4 == 1)
-                ansID = "B";
-            else if (i % 4 == 2)
-                ansID = "C";
-            else if (i % 4 == 3)
-                ansID = "D";
-
-
-            requestQueue = Volley.newRequestQueue(cntxt);
-
-            String requestURL = "https://studev.groept.be/api/a21pt216/addAnswersToDB/" + this.getQuizid() + "/" + questionID + "/" + ansID + "/" + this.getAnswers().get(i) + "/" + (this.getCorrectAns().get((i/4) + 1) == ansID);
-
-            JsonArrayRequest queueRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
-                    response -> {
-                    },
-                    error -> Toast.makeText(cntxt, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
-            );
-            requestQueue.add(queueRequest);
-        }
-    }
 }

@@ -3,6 +3,7 @@ package be.kuleuven.queazy;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
 
@@ -32,6 +38,7 @@ public class AddQuestion1Activity extends AppCompatActivity implements AddQuesti
     private Button btnPopupBackToMenu, btnPopupCancel;
     private QuizAddition newQuiz;
     private int questionNr;
+    private RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,12 +132,68 @@ public class AddQuestion1Activity extends AppCompatActivity implements AddQuesti
 
     @Override
     public void addQuizToDB() {
-        newQuiz.addToDB( AddQuestion1Activity.this);
+        addQuizNameToDB();
+        addQuestionsToDB();
+        addAnswersToDB();
     }
+
 
     @Override
     public void onBtnCancel_Clicked(View caller){
         createNewContactDialog();
+    }
+
+    public void addQuizNameToDB() {
+        requestQueue = Volley.newRequestQueue(AddQuestion1Activity.this);
+
+        String requestURL = "https://studev.groept.be/api/a21pt216/addQuizName/" + newQuiz.getQuizid() + "/" + newQuiz.getQuizName() + "/" + newQuiz.getDifficulty();
+
+        JsonArrayRequest queueRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+                response -> {},
+                error -> Toast.makeText(AddQuestion1Activity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
+        );
+        requestQueue.add(queueRequest);
+    }
+
+    public void addQuestionsToDB() {
+        for (int i = 0; i < newQuiz.getQuestions().size(); i++) {
+            requestQueue = Volley.newRequestQueue(AddQuestion1Activity.this);
+            int questionID = i + 1;
+            String requestURL = "https://studev.groept.be/api/a21pt216/addQuestionsToDB/" + newQuiz.getQuizid() + "/" + questionID + "/" + newQuiz.getQuestions().get(i);
+
+            JsonArrayRequest queueRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+                    response -> {},
+                    error -> Toast.makeText(AddQuestion1Activity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
+            );
+            requestQueue.add(queueRequest);
+        }
+    }
+    public void addAnswersToDB() {
+        String ansID = "A";
+        for (int i = 0; i < newQuiz.getAnswers().size(); i++) {
+            int questionID = (i/4) + 1;
+            int correctness = 0;
+
+            if (i % 4 == 1)
+                ansID = "B";
+            else if (i % 4 == 2)
+                ansID = "C";
+            else if (i % 4 == 3)
+                ansID = "D";
+
+            if (newQuiz.getCorrectAns().get(i / 4).equals(ansID))
+                correctness = 1;
+
+            requestQueue = Volley.newRequestQueue(AddQuestion1Activity.this);
+
+            String requestURL = "https://studev.groept.be/api/a21pt216/addAnswersToDB/" + newQuiz.getQuizid() + "/" + questionID + "/" + ansID + "/" + newQuiz.getAnswers().get(i) + "/" + correctness;
+
+            JsonArrayRequest queueRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+                    response -> {},
+                    error -> Toast.makeText(AddQuestion1Activity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
+            );
+            requestQueue.add(queueRequest);
+        }
     }
 
     public void createNewContactDialog(){
