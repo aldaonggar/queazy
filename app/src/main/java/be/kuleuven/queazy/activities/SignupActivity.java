@@ -1,19 +1,15 @@
-package be.kuleuven.queazy;
-
-import androidx.appcompat.app.AppCompatActivity;
+package be.kuleuven.queazy.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -21,15 +17,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
+import be.kuleuven.queazy.R;
 import be.kuleuven.queazy.interfaces.BackBtn;
 import be.kuleuven.queazy.models.CurrentUser;
 
 public class SignupActivity extends AppCompatActivity implements BackBtn {
 
-    private Button btnSignUp;
-    private Button btnBackToLoginPage;
     private int usersWithSameName;
     private RequestQueue requestQueue;
 
@@ -37,8 +30,6 @@ public class SignupActivity extends AppCompatActivity implements BackBtn {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        btnSignUp = findViewById(R.id.btnSignUp);
-        btnBackToLoginPage = findViewById(R.id.btnBackToLoginPage);
     }
 
     @Override
@@ -48,7 +39,6 @@ public class SignupActivity extends AppCompatActivity implements BackBtn {
     }
 
     public void onBtnSignUp_Clicked(View caller){
-        uniqueUsernameCheck();
         if (passwordLength() && passwordMatching()) {
             uniqueUsernameCheck();
             EditText textUsername = findViewById(R.id.txtUsernameCreate);
@@ -88,12 +78,12 @@ public class SignupActivity extends AppCompatActivity implements BackBtn {
         StringRequest submitRequest = new StringRequest(Request.Method.GET, SUBMIT_URL,
                 response -> {
                     try {
-                        String responseStringUsername = "";
+                        String responseStringUsername;
                         JSONArray responseArray = new JSONArray(response);
                         for(int i=0;i<responseArray.length();i++){
                             JSONObject currentObject = responseArray.getJSONObject( i );
                             responseStringUsername = currentObject.getString("COUNT(*)");
-                            usersWithSameName = Integer.valueOf(responseStringUsername);
+                            usersWithSameName = Integer.parseInt(responseStringUsername);
                         }
                         if (usersWithSameName == 0) {
                             signup();
@@ -137,7 +127,7 @@ public class SignupActivity extends AppCompatActivity implements BackBtn {
         requestQueue = Volley.newRequestQueue(this);
 
         String SUBMIT_URL = "https://studev.groept.be/api/a21pt216/SignUp2";
-        String requestURL = SUBMIT_URL + "/" + username.getText() + "/" + 0 + "/" + "Newbie" + "/" + 0 + "/" + 0;
+        String requestURL = SUBMIT_URL + "/" + username.getText() + "/" + 0 + "/" + 0 + "/" + 0;
 
         StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
                 response -> {

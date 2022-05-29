@@ -1,35 +1,26 @@
-package be.kuleuven.queazy;
+package be.kuleuven.queazy.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintSet;
-
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
+import be.kuleuven.queazy.R;
 import be.kuleuven.queazy.interfaces.BackBtn;
 import be.kuleuven.queazy.models.CurrentQuiz;
 import be.kuleuven.queazy.models.CurrentUser;
@@ -62,7 +53,7 @@ public class QuizListActivity extends AppCompatActivity implements BackBtn {
                 response -> {
 
                     for (int i = 0; i < response.length(); i++) {
-                        JSONObject o = null;
+                        JSONObject o;
                         try {
 
                             o = response.getJSONObject(i);

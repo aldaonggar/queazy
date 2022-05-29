@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/purple_500"
-    tools:context=".ProfileActivity">
+    tools:context=".activities.ProfileActivity">
 
     <Button
         android:id="@+id/btnLogOut"
@@ -50,21 +50,6 @@
         app:layout_constraintTop_toBottomOf="@+id/txtQuizzesPassed"
         app:layout_constraintVertical_bias="0.07" />
 
-    <TextView
-        android:id="@+id/txtBadge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="BADGE:"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPoints"
-        app:layout_constraintVertical_bias="0.07" />
-
     <ImageView
         android:id="@+id/ivAvatar"
         android:layout_width="136dp"
@@ -95,16 +80,16 @@
         android:id="@+id/txtRank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rank:"
+        android:text="RANK:"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogOut"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.069"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtBadge"
-        app:layout_constraintVertical_bias="0.07" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPoints"
+        app:layout_constraintVertical_bias="0.223" />
 
     <TextView
         android:id="@+id/txtUsername3"
@@ -147,30 +132,20 @@
         app:layout_constraintTop_toBottomOf="@+id/txtQuizzesPassedValue" />
 
     <TextView
-        android:id="@+id/txtBadgeValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="16dp"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/txtQuizzesPassed"
-        app:layout_constraintTop_toBottomOf="@+id/txtPointsValue" />
-
-    <TextView
         android:id="@+id/txtRankValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="16dp"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogOut"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/txtQuizzesPassed"
-        app:layout_constraintTop_toBottomOf="@+id/txtBadgeValue" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPointsValue"
+        app:layout_constraintVertical_bias="0.261" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabChangeAvatar"

@@ -7,7 +7,7 @@
     android:background="@color/purple_500"
     android:textAlignment="center"
     android:textDirection="anyRtl"
-    tools:context=".AddQuestion1Activity">
+    tools:context=".activities.AddQuestion1Activity">
 
     <Button
         android:id="@+id/btnAddQuestion1"

@@ -1,15 +1,13 @@
-package be.kuleuven.queazy;
-
-import androidx.appcompat.app.AppCompatActivity;
+package be.kuleuven.queazy.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,24 +17,20 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import be.kuleuven.queazy.R;
 import be.kuleuven.queazy.interfaces.BackBtn;
 import be.kuleuven.queazy.models.QuizAddition;
 
 public class AddQuizNameActivity extends AppCompatActivity implements BackBtn {
 
-    private Button btnAddQuestions;
-    private Button btnBackToMenuPage;
     private EditText txtQuizName;
     private Spinner spDifficulty;
-    private RequestQueue requestQueue;
     private QuizAddition newQuiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_quiz_name);
-        btnAddQuestions = findViewById(R.id.btnAddQuestions);
-        btnBackToMenuPage = findViewById(R.id.btnBackToMenuPage4);
         txtQuizName = findViewById(R.id.txtQuizNameAdd);
         spDifficulty = findViewById(R.id.spDifficulty);
         newQuiz = new QuizAddition();
@@ -59,7 +53,7 @@ public class AddQuizNameActivity extends AppCompatActivity implements BackBtn {
     }
 
     public void findQuizID(String qn, String diff) {
-        requestQueue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         String requestURL = "https://studev.groept.be/api/a21pt216/getLastQuizID";
 

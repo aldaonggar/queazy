@@ -1,19 +1,15 @@
-package be.kuleuven.queazy;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.customview.widget.ViewDragHelper;
+package be.kuleuven.queazy.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
-import android.view.Gravity;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -23,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import be.kuleuven.queazy.R;
 import be.kuleuven.queazy.models.CurrentQuiz;
 import be.kuleuven.queazy.models.CurrentUser;
 
@@ -35,11 +32,6 @@ public class QuizActivity extends AppCompatActivity {
     private String username;
 
     private int[] iscorrect;
-
-    private AlertDialog.Builder dialogBuilder;
-    private AlertDialog dialog;
-    private TextView txtQuizOver;
-    private Button btnPopupOk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,10 +134,10 @@ public class QuizActivity extends AppCompatActivity {
 
         timer.cancel();
 
-        dialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         final View contactPopupView = getLayoutInflater().inflate(R.layout.popupquizover, null);
-        txtQuizOver = contactPopupView.findViewById(R.id.txtQuizOver);
-        btnPopupOk = contactPopupView.findViewById(R.id.btnPopupOk);
+        TextView txtQuizOver = contactPopupView.findViewById(R.id.txtQuizOver);
+        Button btnPopupOk = contactPopupView.findViewById(R.id.btnPopupOk);
 
 
         if (correctness == 1) {
@@ -159,7 +151,7 @@ public class QuizActivity extends AppCompatActivity {
             txtQuizOver.setText("Out of time" + "\n" + "Points earned: " + points);
         }
         dialogBuilder.setView(contactPopupView);
-        dialog = dialogBuilder.create();
+        AlertDialog dialog = dialogBuilder.create();
         dialog.show();
 
 

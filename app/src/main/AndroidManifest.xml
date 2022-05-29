@@ -10,31 +10,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Queazy">
         <activity
-            android:name=".QuizActivity"
+            android:name=".activities.QuizActivity"
             android:exported="false" />
         <activity
-            android:name=".QuizListActivity"
+            android:name=".activities.QuizListActivity"
             android:exported="false" />
         <activity
-            android:name=".RankingsActivity"
+            android:name=".activities.RankingsActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".activities.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".AddQuizNameActivity"
+            android:name=".activities.AddQuizNameActivity"
             android:exported="false" />
         <activity
-            android:name=".AddQuestion1Activity"
+            android:name=".activities.AddQuestion1Activity"
             android:exported="false" />
         <activity
-            android:name=".MenuActivity"
+            android:name=".activities.MenuActivity"
             android:exported="false" />
         <activity
-            android:name=".SignupActivity"
+            android:name=".activities.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

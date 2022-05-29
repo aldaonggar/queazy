@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 
 public class CurrentUser {
     private static String currentUser;
-    private static Bitmap currentAvatar;
 
     public CurrentUser(){
         currentUser = null;

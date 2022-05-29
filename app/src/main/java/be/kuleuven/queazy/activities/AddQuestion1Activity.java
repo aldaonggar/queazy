@@ -1,9 +1,5 @@
-package be.kuleuven.queazy;
+package be.kuleuven.queazy.activities;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,8 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,21 +19,15 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
 
+import be.kuleuven.queazy.R;
 import be.kuleuven.queazy.interfaces.AddQuestion;
 import be.kuleuven.queazy.models.QuizAddition;
 
 public class AddQuestion1Activity extends AppCompatActivity implements AddQuestion {
 
-    private Button btnAddQuestion;
-    private Button btnAddQuiz;
-    private Button btnCancel;
-
-    private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
-    private TextView txtAreYouSure;
     private EditText txtQuestion, txtA, txtB, txtC, txtD;
     private RadioGroup rgAns;
-    private Button btnPopupBackToMenu, btnPopupCancel;
     private QuizAddition newQuiz;
     private int questionNr;
     private RequestQueue requestQueue;
@@ -44,9 +36,8 @@ public class AddQuestion1Activity extends AppCompatActivity implements AddQuesti
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_question1);
-        btnAddQuestion = findViewById(R.id.btnAddQuestion1);
-        btnAddQuiz = findViewById(R.id.btnAddQuiz1);
-        btnCancel = findViewById(R.id.btnCancel);
+        Button btnAddQuestion = findViewById(R.id.btnAddQuestion1);
+        Button btnAddQuiz = findViewById(R.id.btnAddQuiz1);
         txtQuestion = findViewById(R.id.txtWriteQuestion1);
         txtA = findViewById(R.id.txtA1);
         txtB = findViewById(R.id.txtB1);
@@ -70,7 +61,7 @@ public class AddQuestion1Activity extends AppCompatActivity implements AddQuesti
             btnAddQuiz.setClickable(false);
         }
 
-        Toast.makeText(AddQuestion1Activity.this, "Question " + questionNr, Toast.LENGTH_LONG).show();
+        //Toast.makeText(AddQuestion1Activity.this, "Question " + questionNr, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -197,11 +188,10 @@ public class AddQuestion1Activity extends AppCompatActivity implements AddQuesti
     }
 
     public void createNewContactDialog(){
-        dialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         final View contactPopupView = getLayoutInflater().inflate(R.layout.popup, null);
-        txtAreYouSure = contactPopupView.findViewById(R.id.txtAreYouSure);
-        btnPopupCancel = contactPopupView.findViewById(R.id.btnPopupCancel);
-        btnPopupBackToMenu = contactPopupView.findViewById(R.id.btnPopupBackToMenu);
+        Button btnPopupCancel = contactPopupView.findViewById(R.id.btnPopupCancel);
+        Button btnPopupBackToMenu = contactPopupView.findViewById(R.id.btnPopupBackToMenu);
 
         dialogBuilder.setView(contactPopupView);
         dialog = dialogBuilder.create();

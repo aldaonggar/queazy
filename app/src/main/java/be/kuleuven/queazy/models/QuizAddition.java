@@ -1,22 +1,7 @@
 package be.kuleuven.queazy.models;
 
-import android.content.Context;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-
-import be.kuleuven.queazy.AddQuizNameActivity;
-import be.kuleuven.queazy.RankingsActivity;
 
 public class QuizAddition implements Serializable {
 

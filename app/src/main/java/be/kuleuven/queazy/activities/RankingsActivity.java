@@ -1,17 +1,13 @@
-package be.kuleuven.queazy;
-
-import androidx.appcompat.app.AppCompatActivity;
+package be.kuleuven.queazy.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,17 +17,14 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import be.kuleuven.queazy.R;
 import be.kuleuven.queazy.interfaces.BackBtn;
 
 public class RankingsActivity extends AppCompatActivity implements BackBtn {
 
-    private RequestQueue requestQueue;
     private String username;
     private int totalpoints;
     private int ranking;
-    private String badge;
-    private int quizzespassed;
-    private int quizzesattended;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +43,7 @@ public class RankingsActivity extends AppCompatActivity implements BackBtn {
     public void putTable() {
         LinearLayout myLayout = findViewById(R.id.llRankings);
         myLayout.setOrientation(LinearLayout.VERTICAL);
-        requestQueue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         String requestURL = "https://studev.groept.be/api/a21pt216/orderUsersByPoints";
 
