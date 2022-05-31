@@ -124,7 +124,8 @@ public class AddQuestion1Activity extends AppCompatActivity implements AddQuesti
     @Override
     public void addQuizToDB() {
         addQuizNameToDB();
-
+        addQuestionsToDB();
+        addAnswersToDB();
     }
 
 
@@ -139,7 +140,7 @@ public class AddQuestion1Activity extends AppCompatActivity implements AddQuesti
         String requestURL = "https://studev.groept.be/api/a21pt216/addQuizName/" + newQuiz.getQuizid() + "/" + newQuiz.getQuizName() + "/" + newQuiz.getDifficulty();
 
         JsonArrayRequest queueRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
-                response -> {addQuestionsToDB();},
+                response -> {},
                 error -> Toast.makeText(AddQuestion1Activity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
         );
         requestQueue.add(queueRequest);
@@ -154,7 +155,7 @@ public class AddQuestion1Activity extends AppCompatActivity implements AddQuesti
             String requestURL = "https://studev.groept.be/api/a21pt216/addQuestionsToDB/" + quizid + "/" + questionID + "/" + question;
 
             JsonArrayRequest queueRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
-                    response -> {addAnswersToDB();},
+                    response -> {},
                     error -> Toast.makeText(AddQuestion1Activity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
             );
             requestQueue.add(queueRequest);
