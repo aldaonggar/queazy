@@ -61,7 +61,7 @@ public class AddQuestion1Activity extends AppCompatActivity implements AddQuesti
             btnAddQuiz.setClickable(false);
         }
 
-        //Toast.makeText(AddQuestion1Activity.this, "Question " + questionNr, Toast.LENGTH_LONG).show();
+        Toast.makeText(AddQuestion1Activity.this, "Question " + questionNr, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -124,8 +124,7 @@ public class AddQuestion1Activity extends AppCompatActivity implements AddQuesti
     @Override
     public void addQuizToDB() {
         addQuizNameToDB();
-        addQuestionsToDB();
-        addAnswersToDB();
+
     }
 
 
@@ -140,20 +139,22 @@ public class AddQuestion1Activity extends AppCompatActivity implements AddQuesti
         String requestURL = "https://studev.groept.be/api/a21pt216/addQuizName/" + newQuiz.getQuizid() + "/" + newQuiz.getQuizName() + "/" + newQuiz.getDifficulty();
 
         JsonArrayRequest queueRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
-                response -> {},
+                response -> {addQuestionsToDB();},
                 error -> Toast.makeText(AddQuestion1Activity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
         );
         requestQueue.add(queueRequest);
     }
 
     public void addQuestionsToDB() {
+        int quizid = newQuiz.getQuizid();
         for (int i = 0; i < newQuiz.getQuestions().size(); i++) {
             requestQueue = Volley.newRequestQueue(AddQuestion1Activity.this);
             int questionID = i + 1;
-            String requestURL = "https://studev.groept.be/api/a21pt216/addQuestionsToDB/" + newQuiz.getQuizid() + "/" + questionID + "/" + newQuiz.getQuestions().get(i);
+            String question = newQuiz.getQuestions().get(i);
+            String requestURL = "https://studev.groept.be/api/a21pt216/addQuestionsToDB/" + quizid + "/" + questionID + "/" + question;
 
             JsonArrayRequest queueRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
-                    response -> {},
+                    response -> {addAnswersToDB();},
                     error -> Toast.makeText(AddQuestion1Activity.this, "Unable to communicate with the server", Toast.LENGTH_LONG).show()
             );
             requestQueue.add(queueRequest);
